@@ -1,0 +1,35 @@
+---
+title: "Week 6"
+subtitle: "Logistic Regression"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("../helper.R")
+```
+
+::: {.callout-important}
+- Quiz 6 due by 11:59pm on `r advdate2(fri, 5)`
+- Homework Assignment 3 due by 11:59pm on `r advdate2(sat, 5)`
+- Final Project due by 11:59pm on `r advdate2(sat, 5)`
+:::
+
+## Readings
+
+| 📖 [IMS, chap. 9](https://openintro-ims.netlify.app/model-logistic)
+
+## Videos
+
+| 🖥 [Logistic Regression](https://youtu.be/xuTiAW0OR40?si=tSYvPmJKR-cvNtAX)
+| 🖥 [Display Regression Results with Broom](https://youtu.be/upn8dlhvbns)
+| 🖥 [Make a Regression Table with Model Summary](https://youtu.be/My6_X6x5TZw)
+| 🖥 [Make a Coefficient Plot](https://youtu.be/gif_wkqyub8)
+
+## Assignments
+
+| 📘 [Module 6 Quiz](https://blackboard.gwu.edu/ultra/courses/_403120_1/outline/assessment/test/_13850333_1?courseId=_403120_1&gradeitemView=details)
+| 🧮 [Homework 3](../assignments/homework-3.qmd)
+| 🖋️ [Final Project](../project/project-description.qmd)

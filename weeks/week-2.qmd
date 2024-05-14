@@ -1,0 +1,35 @@
+---
+title: "Week 2"
+subtitle: "Data Wrangling"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("../helper.R")
+```
+
+::: {.callout-important}
+- Quiz 2 due by 11:59pm on `r advdate2(fri, 1)`.
+- Homework Assignment 1 due by 11:59pm on `r advdate2(mon, 2)`.
+:::
+
+## Readings
+
+| 📖 [r4ds, chap. 3](https://r4ds.hadley.nz/data-transform.html)
+| 📖 [Lipset, Some Social Requisites of Democracy](https://www-jstor-org.proxygw.wrlc.org/stable/1951731?seq=8)
+
+## Videos
+
+| 🖥 [Transforming Data with dplyr Verbs](https://youtu.be/ScQD47eJeAE)
+| 🖥 [Summarizing Data by Groups with dplyr Verbs](https://youtu.be/mgBwVzMV-v8)
+
+## Assignments
+
+| 📘 [Module 2 Quiz](https://blackboard.gwu.edu/ultra/courses/_403120_1/outline/assessment/test/_13850329_1?courseId=_403120_1&gradeitemView=details)
+| 🧮 [Homework 1](../assignments/homework-1.qmd)
+
+
+

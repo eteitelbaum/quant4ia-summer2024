@@ -1,0 +1,33 @@
+---
+title: "Week 4"
+subtitle: "Inference"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("../helper.R")
+```
+
+::: {.callout-important}
+- Quiz 4 due by 11:59pm on `r advdate2(fri, 3)`
+- Homework Assignment 2 due by 11:59pm on `r advdate2(mon, 4)`
+:::
+
+## Readings
+
+| 📖 [IMS, chap. 16](https://openintro-ims.netlify.app/inference-one-prop)
+| 📖 [IMS, chap. 20](https://openintro-ims.netlify.app/inference-two-means)
+| 📖 [Reshaping Institutions](https://academic.oup.com/qje/article-abstract/127/4/1755/1841616)
+
+## Videos
+
+| 🖥 [Hypothesis Testing](https://youtu.be/cn4S3QqEBRg?si=F7XBZ9V2Q1Gm8K3l)
+| 🖥 [Permutation Hypothesis Testing](https://youtu.be/rJ3AZCQuiLw?si=kDzhu_8rKmfDOOUH)
+
+## Assignments
+
+| 📘 [Module 4 Quiz](https://blackboard.gwu.edu/ultra/courses/_403120_1/outline/assessment/test/_13850331_1?courseId=_403120_1&gradeitemView=details)
+| 🧮 [Homework 2](../assignments/homework-2.qmd)

@@ -1,0 +1,36 @@
+---
+title: "Week 1"
+subtitle: "Data Visualization"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("../helper.R")
+```
+
+::: {.callout-important}
+Quiz 1 due by 11:59pm on `r advdate2(fri, 0)`
+:::
+
+## Readings
+
+| 📖 [r4ds, chap. 7](https://r4ds.hadley.nz/data-import)
+| 📖 [r4ds, chap. 1](https://r4ds.hadley.nz/data-visualize.html)
+| 📖 [r4ds, chap. 9](https://r4ds.hadley.nz/layers.html)
+| 📖 [r4ds, chap. 11](https://r4ds.hadley.nz/communication.html)
+
+## Videos
+
+| 🖥 [Make a Bar Chart in R with ggplot2](https://youtu.be/QG1oDJPoIio)
+| 🖥 [Make a Histogram in R with ggplot2](https://youtu.be/-1YhCql-gMo)
+| 🖥 [Make a Line Chart in R with ggplot2](https://youtu.be/PnmQ2MFQpIc)
+| 🖥 [Make a Scatterplot in R with ggplot2](https://youtu.be/FiosjUVyfLM)
+
+## Assignments
+
+| 📘 [Module 1 Quiz](https://blackboard.gwu.edu/ultra/courses/_403120_1/outline/assessment/test/_13850328_1?courseId=_403120_1&gradeitemView=details)
+
+

@@ -1,0 +1,30 @@
+---
+title: "Week 5"
+subtitle: "Linear Regression"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("../helper.R")
+```
+
+::: {.callout-important}
+Quiz 5 due by 11:59pm on `r advdate2(fri, 4)`
+:::
+
+## Readings
+
+| 📖 [IMS, chap. 7](https://openintro-ims.netlify.app/model-slr)
+| 📖 [IMS, chap. 8](https://openintro-ims.netlify.app/model-mlr)
+
+## Videos
+
+| 🖥 [Linear Regressin with One Variable](https://youtu.be/dLc-lfEEYss?si=CtjssYXoz4tzCMxM)
+| 🖥 [Linear Regression with Multiple Variables](https://youtu.be/jXg0vU0y1ak?si=aq6DdZcDbGBxNPbw)
+
+## Assignments
+
+| 📘 [Module 5 Quiz](https://blackboard.gwu.edu/ultra/courses/_403120_1/outline/assessment/test/_13850332_1?courseId=_403120_1&gradeitemView=details)
