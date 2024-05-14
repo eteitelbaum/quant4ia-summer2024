@@ -78,6 +78,8 @@ website:
             text: "Datasets"
       - section: "Course Modules"
         contents:
+          - href: modules/getting-started.qmd
+            text: "Getting Started"
           - href: modules/module-1.1.qmd
             text: "Module 1.1"
           - href: modules/module-1.2.qmd
