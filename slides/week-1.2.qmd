@@ -543,10 +543,9 @@ polyarchy_annual <- vdem %>%
   drop_na()
 ```
 
-## Links to Classwork Folders
+## Link to Classwork Folder
 
-- [Box](https://gwu.box.com/s/9xwaelyhv7uibtegxrgh80vgo7da10ie)
-- [Dropbox](https://www.dropbox.com/scl/fo/g4tdpdwcij78nyydvr4bp/h?rlkey=hctskhle6222csnwre5ir9gz3&dl=0)
+- [Dropbox](https://www.dropbox.com/scl/fo/k6q8n5lbwbff6j0h5vvs1/AK9Ibhnd8t3rxV5FneYf8AU?rlkey=zo2rejko587tfvoq8tterd44r&dl=0)
 
 ## Huntington's Three Waves
 
