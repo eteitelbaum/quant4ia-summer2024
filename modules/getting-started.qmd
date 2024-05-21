@@ -29,16 +29,37 @@ Finally, we see a pane with Files, Plots, Packages etc. Files tells us what file
 
 Before you move on to the next section, take some time to familiarize yourself with the various user-friendly buttons and shortcuts available to you like the drop down menu for the pane layout, a spell checker, a button for inserting a code chunk and other features that you can play around with. 
 
+## Quarto
+
+{{< video https://youtu.be/6QN9ZYURDFg title='Your First Quarto Document' >}}
+
+Once you have R, R Studio and Quarto installed, you are ready to start integrating text and code with [Quarto](https://quarto.org/). Quarto is an open source publishing platform that enables you to integrate text with code. If you have used [R Markdown](https://rmarkdown.rstudio.com/) before then Quarto will look familiar to you because Quarto is the next generation of R Markdown.
+
+RStudio comes with a version of Quarto already installed, but it can be useful to install the most recent version separately and because doing so will allow you to use Quarto with another IDE like VS Code. You can install the most recent version of Quarto by visiting [this page](https://quarto.org/docs/get-started/) and selecting the version for your operating system.
+
+Now take a little time to create a Quarto project in R Studio and make sure everything is working properly. But before you get started, create a new folder(directory) for this course on your computer somewhere. Once that is done, go to File > New Project. Then select Quarto Project and name the project something like "test-project" in the Directory name field. Next, select Browse and navigate to the folder that you created for this course. Select Create Project. 
+
+You will notice that in your new project folder there is a file with an .Rproj extension. The .Rproj file is what tells RStudio which files are associated with the project and it obviates the need to set the working directory. It also makes it possible to share the folder with anyone who is running R and RStudio and have them run your code without having to set a working directory. This is what we refer to as a [project-based workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) and we will use it for every assignment in this class.
+
+Now try rendering the document with the Render toggle button. By default, Quarto renders an .html file that it will open in a browser and save to your project folder. 
+
+Next we want to try rendering a .pdf document. To do this, we have to install [tinytex](https://yihui.org/tinytex/), a lightweight version of LaTeX.  To do this, go to the Terminal and type `quarto install tinytex`. Now, change the format from `html` to `pdf` by inserting `format: pdf` in the YAML header. Then render the document again. A .pdf document should open up. 
+
+Now take a few minutes and try changing more of the code in the YAML header. You can try changing the title, adding a subtitle (`subtitle:`) or changing the [execution options](https://quarto.org/docs/computations/execution-options.html). By default, Quarto uses the [visual editor](https://quarto.org/docs/visual-editor/) but behind the scenes it is using Markdown. Try and edit some text using the toggle buttons available in the visual editor and then switch to Source to view the underlying Markdown code. Play with the R code chunks embedded in the document or try adding new code chunks.
+
+You may already have some experience writing in Markdown, which is a lightweight markup language that enables you to format plaintext files. If you have not used Markdown, or if your memory is hazy, don't worry: it is really easy to learn. Have a look at this Markdown [cheat sheet](https://www.markdownguide.org/cheat-sheet/) and try to familiarize yourself with its basic syntax. 
+Finally, take some time to get familiar with the [Guide](https://quarto.org/docs/guide/) and [Reference](https://quarto.org/docs/reference/) sections of the Quarto website. Then take a look at the [gallery](https://quarto.org/docs/gallery/) so that you can get an idea of the kinds of things you can produce with Quarto. 
+
 ## Running and Modifying Code
 
 Next we are going to get our hands dirty by running and modifying some code. 
-Create a folder for this class somewhere on your machine. Next, create a sub-folder called "classwork" and save week1-classwork.qmd in that folder. 
+Create a folder for this class somewhere on your machine. Next, create a sub-folder called `classwork`. Next, follow [this link](https://www.dropbox.com/scl/fo/k6q8n5lbwbff6j0h5vvs1/AK9Ibhnd8t3rxV5FneYf8AU?rlkey=zo2rejko587tfvoq8tterd44r&dl=0). Take the `getting-started` in that folder and transfer it to your the `classwork` folder that you just make,.
 
-Now open the week1-classwork.qmd file in RStudio, which has code for 3 data viz activities: map making; democracy over time; and UN voting patterns. 
+Now open the project in RStudio by opening the folder and clicking on the .Rproj file. Then open the week1-classwork.qmd file in RStudio, which has code for 3 data viz activities: map making; democracy over time; and UN voting patterns. 
 
 Follow the instructions in the .qmd file to update the code. Click Render to update your HTML output and examine. Complete as much as you can. 
 
-Alternatively, you can create your own .qmd file and copy and paste the code below into your file.
+Alternatively, you can create your own .qmd file and copy and paste the code below into your file (but you will have to install the relevant packages first).
 
 ### Example 1: Make a map!
 
@@ -46,8 +67,9 @@ Alternatively, you can create your own .qmd file and copy and paste the code bel
 #| label: leaflet_map
 
 library(leaflet)
-leaflet() %>% 
-  addTiles() %>%   # Add default OpenStreetMap map tiles
+
+leaflet() |> 
+  addTiles() |>   # Add default OpenStreetMap map tiles
   addMarkers(lat = 38.90243843683386, lng =  -77.0443814477152, 
              label = "Elliott School of International Affairs")
 ```
@@ -63,16 +85,17 @@ cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
 library(vdemdata)
 library(ggplot2)
 library(tidyverse)
+
 # We will use the data called vdem
-vdem %>%
+vdem |>
   # and then we are going to filter out and only use France and India
-  filter(country_name == "France" | country_name == "India") %>%
+  filter(country_name == "France" | country_name == "India") |>
   # and then we are going to only use years since 1850
-  filter(year > 1849) %>% 
+  filter(year > 1849) |> 
     # and then we are going to use this filtered data to make a plot
     #with democracy on the y axis and year on the x
     # we want this plot to use different colors for each country
-    ggplot(., aes(y = v2x_polyarchy, x = year, color=country_name)) +
+    ggplot(mapping = aes(y = v2x_polyarchy, x = year, color=country_name)) +
       geom_line() +
       theme_minimal() +
       xlab("Year") +
@@ -96,19 +119,19 @@ library(lubridate)
 library(scales)
 library(pacman)
 
-unvotes <- un_votes %>%
-  inner_join(un_roll_calls, by = "rcid") %>%
+unvotes <- un_votes |>
+  inner_join(un_roll_calls, by = "rcid") |>
   inner_join(un_roll_call_issues, by = "rcid")
 
-unvotes %>%
+unvotes |>
   # then filter out to only include the countries we want
-  filter(country %in% c("South Africa", "United States", "France")) %>%
+  filter(country %in% c("South Africa", "United States", "France")) |>
   # then make sure R understands the the year variable is a data
-  mutate(year = year(date)) %>%
+  mutate(year = year(date)) |>
   # Then group the data by country and year
-  group_by(country, year, issue) %>%
+  group_by(country, year, issue) |>
   # then take the average Yes votes for each country_year
-  summarize(percent_yes = mean(vote == "yes")) %>%
+  summarize(percent_yes = mean(vote == "yes")) |>
   # then make a nice plot
   ggplot(mapping = aes(x = year, y = percent_yes, color = country)) +
   geom_point(alpha = 0.4) +
@@ -125,23 +148,3 @@ unvotes %>%
   )
 ```
 
-## Quarto
-
-{{< video https://youtu.be/6QN9ZYURDFg title='Your First Quarto Document' >}}
-
-Once you have R, R Studio and Quarto installed, you are ready to start integrating text and code with [Quarto](https://quarto.org/). Quarto is an open source publishing platform that enables you to integrate text with code. If you have used [R Markdown](https://rmarkdown.rstudio.com/) before then Quarto will look familiar to you because Quarto is the next generation of R Markdown.
-
-RStudio comes with a version of Quarto already installed, but it can be useful to install the most recent version separately and because doing so will allow you to use Quarto with another IDE like VS Code. You can install the most recent version of Quarto by visiting [this page](https://quarto.org/docs/get-started/) and selecting the version for your operating system.
-
-Now take a little time to create a Quarto project in R Studio and make sure everything is working properly. But before you get started, create a new folder(directory) for this course on your computer somewhere. Once that is done, go to File > New Project. Then select Quarto Project and name the project something like "test-project" in the Directory name field. Next, select Browse and navigate to the folder that you created for this course. Select Create Project. 
-
-You will notice that in your new project folder there is a file with an .Rproj extension. The .Rproj file is what tells RStudio which files are associated with the project and it obviates the need to set the working directory. It also makes it possible to share the folder with anyone who is running R and RStudio and have them run your code without having to set a working directory. This is what we refer to as a [project-based workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) and we will use it for every assignment in this class.
-
-Now try rendering the document with the Render toggle button. By default, Quarto renders an .html file that it will open in a browser and save to your project folder. 
-
-Next we want to try rendering a .pdf document. To do this, we have to install [tinytex](https://yihui.org/tinytex/), a lightweight version of LaTeX.  To do this, go to the Terminal and type `quarto install tinytex`. Now, change the format from `html` to `pdf` by inserting `format: pdf` in the YAML header. Then render the document again. A .pdf document should open up. 
-
-Now take a few minutes and try changing more of the code in the YAML header. You can try changing the title, adding a subtitle (`subtitle:`) or changing the [execution options](https://quarto.org/docs/computations/execution-options.html). By default, Quarto uses the [visual editor](https://quarto.org/docs/visual-editor/) but behind the scenes it is using Markdown. Try and edit some text using the toggle buttons available in the visual editor and then switch to Source to view the underlying Markdown code. Play with the R code chunks embedded in the document or try adding new code chunks.
-
-You may already have some experience writing in Markdown, which is a lightweight markup language that enables you to format plaintext files. If you have not used Markdown, or if your memory is hazy, don't worry: it is really easy to learn. Have a look at this Markdown [cheat sheet](https://www.markdownguide.org/cheat-sheet/) and try to familiarize yourself with its basic syntax. 
-Finally, take some time to get familiar with the [Guide](https://quarto.org/docs/guide/) and [Reference](https://quarto.org/docs/reference/) sections of the Quarto website. Then take a look at the [gallery](https://quarto.org/docs/gallery/) so that you can get an idea of the kinds of things you can produce with Quarto. 
