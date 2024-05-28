@@ -969,7 +969,7 @@
     "href": "slides/week-2.1.html#apis",
     "title": "Working with V-Dem Data",
     "section": "APIs",
-    "text": "APIs\n\n\nAPI stands for “Application Programming Interface”\nWay for two computers to talk to each other\n\n\n\n\n\n\n%% Note: fig-width option not working as of Quarto 1.4, try again in 1.5 \n\nflowchart LR\n    Client--&gt;|Request|id1[(API)]\n    id1[(API)]--&gt;|Response|Client\n    id1[(API)]--&gt;Server\n    Server--&gt;id1[(API)]\n\n\n\n\n\n\n\nIn our case, we will use APIs to download social science data"
+    "text": "APIs\n\n\nAPI stands for “Application Programming Interface”\nWay for two computers to talk to each other\n\n\n\n\n\n\n%% Note: fig-width option not working as of Quarto 1.4, try again in 1.5 \n\nflowchart LR\n    Client--&gt;|Request|id1[(API)]\n    id1[(API)]--&gt;|Response|Client\n    id1[(API)]--&gt;Server\n    Server--&gt;id1[(API)]\n\n\n\n\n\n\n\nFor IA, we coulduse APIs to download social science data"
   },
   {
     "objectID": "slides/week-2.1.html#apis-in-r",
@@ -983,7 +983,7 @@
     "href": "slides/week-2.1.html#this-lesson",
     "title": "Working with V-Dem Data",
     "section": "This Lesson",
-    "text": "This Lesson\n\n\n\nAccess V-Dem API with vdemdata Package\nThis is the only package for V-Dem\nJust downloads all the data\nSo we have to use dplyr functions like filter() and select()"
+    "text": "This Lesson\n\n\n\nAccess V-Dem data with vdemdata Package\nThis is the only package for V-Dem\nJust imports all the data\nSo we have to use dplyr functions like filter() and select()"
   },
   {
     "objectID": "slides/week-2.1.html#section",
@@ -4866,5 +4866,12 @@
     "title": "Visualizing Data",
     "section": "Link to Classwork Folder",
     "text": "Link to Classwork Folder\n\nDropbox"
+  },
+  {
+    "objectID": "slides/week-2.1.html#apis-for-ia",
+    "href": "slides/week-2.1.html#apis-for-ia",
+    "title": "Working with V-Dem Data",
+    "section": "APIs for IA",
+    "text": "APIs for IA\n\n\nAPIs are accessed through packages in R\nMuch easier than reading in data from messy flat file!\nHere are a few examples:\n\nWorld Bank data through wbstats or WDI\ncountrycode for country codes\neurostat for data on Europe\n\nBut there are many APIs out there (please explore!)"
   }
 ]

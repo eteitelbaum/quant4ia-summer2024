@@ -101,17 +101,17 @@ flowchart LR
     Server-->id1[(API)]
 ```
 
-- In our case, we will use APIs to download social science data
+- For IA, we coulduse APIs to download social science data
 
-## APIs in R
+## APIs for IA
 
 ::: {.incremental}
 - APIs are accessed through packages in R
-- Sometimes there can be more than one package for an API
 - Much easier than reading in data from messy flat file!
-- We will use two APIs in this course
-  - Varieties of Democracy (V-Dem) through `vdemdata`
-  - World Bank data through `wbstats`
+- Here are a few examples:
+  - World Bank data through `wbstats` or `WDI`
+  - `countrycode` for country codes
+  - `eurostat` for data on Europe
 - But there are many APIs out there (please explore!)
 :::
 
@@ -120,9 +120,9 @@ flowchart LR
 <br>
 
 ::: {.incremental}
-- Access V-Dem API with `vdemdata` Package
+- Access V-Dem data with `vdemdata` Package
 - This is the only package for V-Dem
-- Just downloads all the data
+- Just imports all the data
 - So we have to use `dplyr` functions like `filter()` and `select()`
 :::
 
