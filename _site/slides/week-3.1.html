@@ -11,7 +11,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.533">
 
-  <meta name="dcterms.date" content="2024-05-14">
+  <meta name="dcterms.date" content="2024-06-04">
   <title>IAFF 6501–Spring 2024 Schedule - Categorical Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -405,12 +405,12 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">May 14, 2024</p>
+  <p class="date">June 4, 2024</p>
 </section>
 <section id="todays-classwork" class="slide level2">
 <h2>Today’s Classwork</h2>
 <ul>
-<li>Download classwork folder for today’s class from <a href="https://www.dropbox.com/scl/fo/9heicdr2yp11ztow65aku/h?rlkey=p70w8eg5wftr8vll0wkd8cxkf&amp;dl=0">here</a></li>
+<li>Download classwork folder for today’s class from <a href="https://www.dropbox.com/scl/fo/k6q8n5lbwbff6j0h5vvs1/AK9Ibhnd8t3rxV5FneYf8AU?rlkey=zo2rejko587tfvoq8tterd44r&amp;dl=0">here</a></li>
 </ul>
 </section>
 <section>
@@ -553,9 +553,9 @@ $ region  &lt;chr&gt; "Latin America", "Latin America", "The West", "The West", 
 <div class="cell-output cell-output-stdout">
 <pre><code>               regime  n
 1    Closed Autocracy 33
-2 Electoral Autocracy 56
+2 Electoral Autocracy 54
 3 Electoral Democracy 58
-4   Liberal Democracy 32</code></pre>
+4   Liberal Democracy 34</code></pre>
 </div>
 </div>
 </section>
@@ -563,7 +563,7 @@ $ region  &lt;chr&gt; "Latin America", "Latin America", "The West", "The West", 
 <h2></h2>
 <p>Now let’s visualize the distribution of regimes with a bar plot…</p>
 
-<img data-src="week-3.1_files/figure-html/regime-bar-1-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/regime-bar-1-1.png" width="960" class="r-stretch"></section>
 <section id="section-5" class="slide level2">
 <h2></h2>
 <p>Now let’s visualize the distribution of regimes with a bar plot…</p>
@@ -630,7 +630,7 @@ $ region  &lt;chr&gt; "Latin America", "Latin America", "The West", "The West", 
 <h2>How do Regimes Vary by Region?</h2>
 <p><br></p>
 
-<img data-src="week-3.1_files/figure-html/regime-region-1-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/regime-region-1-1.png" width="960" class="r-stretch"></section>
 <section id="how-do-regimes-vary-by-region-1" class="slide level2">
 <h2>How do Regimes Vary by Region?</h2>
 <p><br></p>
@@ -689,12 +689,12 @@ $ region  &lt;chr&gt; "Latin America", "Latin America", "The West", "The West", 
 <h2></h2>
 <p>Some regions have more countries than others. Why does this create an issue for telling a story with our data here?</p>
 
-<img data-src="week-3.1_files/figure-html/regime-region-4-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/regime-region-4-1.png" width="960" class="r-stretch"></section>
 <section id="show-proportions-instead" class="slide level2">
 <h2>Show Proportions Instead</h2>
 <p><br></p>
 
-<img data-src="week-3.1_files/figure-html/regime-region-5-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/regime-region-5-1.png" width="960" class="r-stretch"></section>
 <section id="section-8" class="slide level2">
 <h2></h2>
 <p>We use <code>position = "fill"</code> to normalize the data and make the plot more interpretable…</p>
@@ -791,7 +791,7 @@ $ region  &lt;chr&gt; "Latin America", "Latin America", "The West", "The West", 
 Columns: 4
 $ country   &lt;chr&gt; "Mexico", "Suriname", "Sweden", "Switzerland", "Ghana", "Sou…
 $ year      &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, 2022, …
-$ polyarchy &lt;dbl&gt; 0.598, 0.770, 0.899, 0.898, 0.633, 0.692, 0.833, 0.093, 0.20…
+$ polyarchy &lt;dbl&gt; 0.571, 0.775, 0.896, 0.897, 0.664, 0.711, 0.817, 0.091, 0.20…
 $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West", "A…</code></pre>
 </div>
 </div>
@@ -807,7 +807,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <span id="cb14-2"><a></a>  <span class="fu">summarize</span>(<span class="at">mean_democracy =</span> <span class="fu">mean</span>(polyarchy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean_democracy
-1          0.497</code></pre>
+1      0.4977821</code></pre>
 </div>
 </div>
 <p>The mean is the average of the values. Common measure of central tendency but sensitive to outliers.</p>
@@ -823,7 +823,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <span id="cb16-2"><a></a>  <span class="fu">summarize</span>(<span class="at">median_democracy =</span> <span class="fu">median</span>(polyarchy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  median_democracy
-1            0.501</code></pre>
+1            0.507</code></pre>
 </div>
 </div>
 <p>The median is the value that separates the higher half from the lower half of the data.</p>
@@ -853,35 +853,35 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <section id="symmetric-distributions" class="slide level2">
 <h2>Symmetric Distributions</h2>
 
-<img data-src="week-3.1_files/figure-html/symmetric-1-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/symmetric-1-1.png" width="960" class="r-stretch"></section>
 <section id="symmetric-distributions-1" class="slide level2">
 <h2>Symmetric Distributions</h2>
 
-<img data-src="week-3.1_files/figure-html/symmetric-2-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/symmetric-2-1.png" width="960" class="r-stretch"></section>
 <section id="skewed-distributions" class="slide level2">
 <h2>Skewed Distributions</h2>
 
-<img data-src="week-3.1_files/figure-html/left-skewed-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/left-skewed-1.png" width="960" class="r-stretch"></section>
 <section id="skewed-distributions-1" class="slide level2">
 <h2>Skewed Distributions</h2>
 
-<img data-src="week-3.1_files/figure-html/right-skewed-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/right-skewed-1.png" width="960" class="r-stretch"></section>
 <section id="bimodal-distribution" class="slide level2">
 <h2>Bimodal Distribution</h2>
 
-<img data-src="week-3.1_files/figure-html/bimodal-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/bimodal-1.png" width="960" class="r-stretch"></section>
 <section id="when-is-the-mean-useful" class="slide level2">
 <h2>When is the Mean Useful?</h2>
 
-<img data-src="week-3.1_files/figure-html/normal-distribution-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/normal-distribution-1.png" width="960" class="r-stretch"></section>
 <section id="when-is-the-mean-useful-1" class="slide level2">
 <h2>When is the Mean Useful?</h2>
 
-<img data-src="week-3.1_files/figure-html/mean-right-skew-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/mean-right-skew-1.png" width="960" class="r-stretch"></section>
 <section id="when-is-the-mean-useful-2" class="slide level2">
 <h2>When is the Mean Useful?</h2>
 
-<img data-src="week-3.1_files/figure-html/mean-bimodal-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/mean-bimodal-1.png" width="960" class="r-stretch"></section>
 <section id="when-is-the-mean-useful-3" class="slide level2">
 <h2>When is the <code>mean</code> useful?</h2>
 <p><br></p>
@@ -910,7 +910,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <h2>Visualize Our Measure</h2>
 <p><br></p>
 
-<img data-src="week-3.1_files/figure-html/visualize-polyarchy-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/visualize-polyarchy-1.png" width="960" class="r-stretch"></section>
 <section id="visualize-our-measure-1" class="slide level2">
 <h2>Visualize Our Measure</h2>
 <p><br></p>
@@ -981,7 +981,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <section id="why-measure-and-visualize-spread" class="slide level2">
 <h2>Why Measure and Visualize Spread?</h2>
 
-<img data-src="week-3.1_files/figure-html/spread-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/spread-1.png" width="960" class="r-stretch"></section>
 <section id="measures-of-spread-range" class="slide level2">
 <h2>Measures of Spread: Range</h2>
 <p><br></p>
@@ -995,7 +995,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <span id="cb20-3"><a></a>            <span class="at">max =</span> <span class="fu">max</span>(polyarchy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    min   max
-1 0.016 0.916</code></pre>
+1 0.015 0.915</code></pre>
 </div>
 </div>
 </section>
@@ -1003,7 +1003,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <h2>Measure of Spread: Interquartile Range</h2>
 <p>IQR: 25th percentile - 75th percentile</p>
 
-<img data-src="week-3.1_files/figure-html/unnamed-chunk-33-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section>
 <section id="interquartile-range" class="slide level2">
 <h2>Interquartile Range</h2>
 <ul>
@@ -1018,7 +1018,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <span id="cb22-5"><a></a>          )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  IQRlow IQRhigh IQRlength
-1  0.262   0.747     0.485</code></pre>
+1 0.2595  0.7495      0.49</code></pre>
 </div>
 </div>
 </section>
@@ -1046,7 +1046,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 </details>
 
 </div>
-<img data-src="week-3.1_files/figure-html/boxplot-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/boxplot-1.png" width="960" class="r-stretch"></section>
 <section id="measure-of-spead-standard-deviation" class="slide level2">
 <h2>Measure of Spead: Standard Deviation</h2>
 <p><br></p>
@@ -1058,8 +1058,8 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <span id="cb25-2"><a></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(polyarchy),</span>
 <span id="cb25-3"><a></a>            <span class="at">stdDev =</span> <span class="fu">sd</span>(polyarchy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   mean   stdDev
-1 0.497 0.259951</code></pre>
+<pre><code>       mean    stdDev
+1 0.4977821 0.2621028</code></pre>
 </div>
 </div>
 </section>
@@ -1221,12 +1221,12 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <pre><code># A tibble: 6 × 3
   region         mean_dem median_dem
   &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;
-1 Africa            0.403      0.371
-2 Asia              0.424      0.428
-3 Eastern Europe    0.533      0.558
-4 Latin America     0.605      0.678
-5 Middle East       0.235      0.213
-6 The West          0.854      0.857</code></pre>
+1 Africa            0.403      0.377
+2 Asia              0.423      0.412
+3 Eastern Europe    0.537      0.564
+4 Latin America     0.607      0.685
+5 Middle East       0.232      0.208
+6 The West          0.856      0.855</code></pre>
 </div>
 </div>
 </section>
@@ -1246,12 +1246,12 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 <pre><code># A tibble: 6 × 3
   region         mean_dem median_dem
   &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;
-1 Africa            0.403      0.371
-2 Asia              0.424      0.428
-3 Eastern Europe    0.533      0.558
-4 Latin America     0.605      0.678
-5 Middle East       0.235      0.213
-6 The West          0.854      0.857</code></pre>
+1 Africa            0.403      0.377
+2 Asia              0.423      0.412
+3 Eastern Europe    0.537      0.564
+4 Latin America     0.607      0.685
+5 Middle East       0.232      0.208
+6 The West          0.856      0.855</code></pre>
 </div>
 </div>
 </section>
@@ -1272,7 +1272,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 </details>
 
 </div>
-<img data-src="week-3.1_files/figure-html/group-by-3-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/group-by-3-1.png" width="960" class="r-stretch"></section>
 <section id="numerical-variable-by-group" class="slide level2">
 <h2>Numerical Variable by Group</h2>
 <p>How should we interpret this plot?</p>
@@ -1294,7 +1294,7 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
 </details>
 
 </div>
-<img data-src="week-3.1_files/figure-html/ridge-plot-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-3.1_files/figure-revealjs/ridge-plot-1.png" width="960" class="r-stretch"></section>
 <section id="your-turn-4" class="slide level2">
 <h2>Your Turn!</h2>
 <p><br></p>
@@ -1530,6 +1530,44 @@ $ region    &lt;chr&gt; "Latin America", "Latin America", "The West", "The West"
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
