@@ -804,21 +804,21 @@ $ influence_2016 &lt;chr&gt; "Did not try", "Did not try", "Did not try", "Don't
 <h2>Bootstrap with <code>tidymodels</code></h2>
 <p>Install <code>tidymodels</code> before running this code chunk…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co">#install.packages("tidymodels")</span></span>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="|1-2|4|5|6-7|8-9|10-11|13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co">#install.packages("tidymodels")</span></span>
 <span id="cb10-2"><a></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb10-3"><a></a></span>
 <span id="cb10-4"><a></a><span class="fu">set.seed</span>(<span class="dv">66</span>)</span>
-<span id="cb10-5"><a></a>boot_df <span class="ot">&lt;-</span> russiaData <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a></a>boot_dist <span class="ot">&lt;-</span> russiaData <span class="sc">|&gt;</span></span>
 <span id="cb10-6"><a></a>  <span class="co"># specify the variable of interest</span></span>
 <span id="cb10-7"><a></a>  <span class="fu">specify</span>(<span class="at">response =</span> try_influence) <span class="sc">|&gt;</span></span>
-<span id="cb10-8"><a></a>  <span class="co"># generate 15000 bootstrap samples</span></span>
-<span id="cb10-9"><a></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-8"><a></a>  <span class="co"># generate 10000 bootstrap samples</span></span>
+<span id="cb10-9"><a></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">10000</span>, <span class="at">type =</span> <span class="st">"bootstrap"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-10"><a></a>  <span class="co"># calculate the mean of each bootstrap sample</span></span>
 <span id="cb10-11"><a></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"mean"</span>)</span>
 <span id="cb10-12"><a></a></span>
-<span id="cb10-13"><a></a><span class="fu">glimpse</span>(boot_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-13"><a></a><span class="fu">glimpse</span>(boot_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 15,000
+<pre><code>Rows: 10,000
 Columns: 2
 $ replicate &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1…
 $ stat      &lt;dbl&gt; 0.1146245, 0.1442688, 0.1343874, 0.1877470, 0.1521739, 0.138…</code></pre>
@@ -828,12 +828,27 @@ $ stat      &lt;dbl&gt; 0.1146245, 0.1442688, 0.1343874, 0.1877470, 0.1521739, 0
 <section id="section-9" class="slide level2">
 <h2></h2>
 <p><br></p>
+<p>Calculate the mean of the bootstrap distribution (of the means of the individual draws)…</p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>boot_dist <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(stat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+   mean
+  &lt;dbl&gt;
+1 0.150</code></pre>
+</div>
+</div>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<p><br></p>
 <p>Calculate the confidence interval. A 95% confidence interval is bounded by the middle 95% of the bootstrap distribution.</p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>boot_df <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a></a>  <span class="fu">summarize</span>(<span class="at">lower =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.025</span>),</span>
-<span id="cb12-3"><a></a>            <span class="at">upper =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>boot_dist <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">summarize</span>(<span class="at">lower =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.025</span>),</span>
+<span id="cb14-3"><a></a>            <span class="at">upper =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   lower upper
@@ -842,38 +857,80 @@ $ stat      &lt;dbl&gt; 0.1146245, 0.1442688, 0.1343874, 0.1877470, 0.1521739, 0
 </div>
 </div>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <p><br></p>
 <p>Create upper and lower bounds for visualization.</p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># for using these values later</span></span>
-<span id="cb14-2"><a></a>lower_bound <span class="ot">&lt;-</span> boot_df <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">lower_bound =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.025</span>)) <span class="sc">|&gt;</span> <span class="fu">pull</span>() </span>
-<span id="cb14-3"><a></a>upper_bound <span class="ot">&lt;-</span> boot_df <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">upper_bound =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">pull</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="section-11" class="slide level2">
-<h2></h2>
-<p><br></p>
-<p>Visualize with a histogram</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> boot_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> stat)) <span class="sc">+</span></span>
-<span id="cb15-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span>.<span class="dv">01</span>, <span class="at">fill =</span> <span class="st">"steelblue4"</span>) <span class="sc">+</span></span>
-<span id="cb15-3"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(lower_bound, upper_bound), <span class="at">color =</span> <span class="st">"darkgrey"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bootstrap distribution of means"</span>,</span>
-<span id="cb15-5"><a></a>       <span class="at">subtitle =</span> <span class="st">"and 95% confidence interval"</span>,</span>
-<span id="cb15-6"><a></a>       <span class="at">x =</span> <span class="st">"Estimate"</span>,</span>
-<span id="cb15-7"><a></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb15-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># for using these values later</span></span>
+<span id="cb16-2"><a></a>lower_bound <span class="ot">&lt;-</span> boot_dist <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">lower_bound =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.025</span>)) <span class="sc">|&gt;</span> <span class="fu">pull</span>() </span>
+<span id="cb16-3"><a></a>upper_bound <span class="ot">&lt;-</span> boot_dist <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">upper_bound =</span> <span class="fu">quantile</span>(stat, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">pull</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-12" class="slide level2">
 <h2></h2>
 <p><br></p>
+<p>Visualize with a histogram</p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> boot_dist, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> stat)) <span class="sc">+</span></span>
+<span id="cb17-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span>.<span class="dv">01</span>, <span class="at">fill =</span> <span class="st">"steelblue4"</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">c</span>(lower_bound, upper_bound), <span class="at">color =</span> <span class="st">"darkgrey"</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bootstrap distribution of means"</span>,</span>
+<span id="cb17-5"><a></a>       <span class="at">subtitle =</span> <span class="st">"and 95% confidence interval"</span>,</span>
+<span id="cb17-6"><a></a>       <span class="at">x =</span> <span class="st">"Estimate"</span>,</span>
+<span id="cb17-7"><a></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<p><br></p>
 
-<img data-src="week-3.2_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="week-3.2_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section id="or-use-the-infer-package" class="slide level2">
+<h2>Or use the <code>infer</code> package</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>ci <span class="ot">&lt;-</span> boot_dist <span class="sc">|&gt;</span> <span class="fu">get_ci</span>(<span class="at">level =</span> <span class="fl">0.95</span>) </span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  lower_ci upper_ci
+     &lt;dbl&gt;    &lt;dbl&gt;
+1    0.119    0.182</code></pre>
+</div>
+</div>
+</section>
+<section id="or-use-the-infer-package-1" class="slide level2">
+<h2>Or use the <code>infer</code> package</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>boot_dist <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a></a>  <span class="fu">visualize</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a></a>  <span class="fu">shade_ci</span>(ci, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a></a>  <span class="fu">labs</span>( </span>
+<span id="cb20-5"><a></a>    <span class="at">title =</span> <span class="st">"Distribution of the Means of the Bootstrap Samples"</span>,</span>
+<span id="cb20-6"><a></a>    <span class="at">x =</span> <span class="st">"Mean"</span>,</span>
+<span id="cb20-7"><a></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb20-8"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb20-9"><a></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="or-use-the-infer-package-2" class="slide level2">
+<h2>Or use the <code>infer</code> package</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="2-3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>boot_dist <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a></a>  <span class="fu">visualize</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">shade_ci</span>(ci, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">labs</span>( </span>
+<span id="cb21-5"><a></a>    <span class="at">title =</span> <span class="st">"Distribution of the Means of the Bootstrap Samples"</span>,</span>
+<span id="cb21-6"><a></a>    <span class="at">x =</span> <span class="st">"Mean"</span>,</span>
+<span id="cb21-7"><a></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb21-8"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb21-9"><a></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="interpret-the-confidence-interval" class="slide level2 smaller">
 <h2>Interpret the confidence interval</h2>
 <p><br></p>
@@ -888,23 +945,8 @@ $ stat      &lt;dbl&gt; 0.1146245, 0.1442688, 0.1343874, 0.1877470, 0.1521739, 0
 <h2>Your Turn!</h2>
 <p><br></p>
 <ul>
-<li>Change the <code>reps</code> argument in the <code>generate()</code> function to 1000. What happens to the width of the confidence interval?</li>
-<li>Change the <code>reps</code> argument in the <code>generate()</code> function to 5000. What happens to the width of the confidence interval?</li>
-<li>Change the <code>reps</code> argument in the <code>generate()</code> function to 10000. What happens to the width of the confidence interval?</li>
-<li>How does the width of the confidence interval change as the number of bootstrap samples increases?</li>
-<li>How would you interpret this finding?</li>
-</ul>
-</section>
-<section id="bias-vs-precision" class="slide level2">
-<h2>Bias vs Precision</h2>
-<ul>
-<li>A procedure is <em>unbiased</em> if it generates the “right” answer, on average</li>
-<li>Precision refers to variability: procedures with less sampling variability will be more precise
-<ul>
-<li>all else equal, a greater sample size will increase precision</li>
-</ul></li>
-<li>When we increase the sample size (number of reps), we increase precision</li>
-<li>As a result our confidence interval will be narrower</li>
+<li>Change the <code>reps</code> argument in the <code>generate()</code> function to something way smaller, like 100. What happens to your estimates?</li>
+<li>Try progressively higher numbers. When do your estimates stabilize?</li>
 </ul>
 </section>
 <section id="why-did-we-do-these-simulations" class="slide level2">
