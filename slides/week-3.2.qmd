@@ -612,7 +612,7 @@ The 95% confidence interval was calculated as (`lower_bound`, `upper_bound`). Wh
 <br>
 
 - Change the `reps` argument in the `generate()` function to something way smaller, like 100. What happens to your estimates?
-- Try progressively higher numbers. When do your estimates stabilize?
+- Try progressively higher numbers. What happens to your estimates as the number of reps increases?
 
 ## Why did we do these simulations?
 

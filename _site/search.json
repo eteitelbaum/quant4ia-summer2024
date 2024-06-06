@@ -2061,7 +2061,7 @@
     "href": "slides/week-3.2.html#your-turn",
     "title": "Sampling and Uncertainty",
     "section": "Your Turn!",
-    "text": "Your Turn!\n\n\nChange the reps argument in the generate() function to something way smaller, like 100. What happens to your estimates?\nTry progressively higher numbers. When do your estimates stabilize?"
+    "text": "Your Turn!\n\n\nChange the reps argument in the generate() function to something way smaller, like 100. What happens to your estimates?\nTry progressively higher numbers. What happens to your estimates as the number of reps increases?"
   },
   {
     "objectID": "slides/week-3.2.html#bias-vs-precision",
