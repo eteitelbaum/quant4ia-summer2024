@@ -4873,5 +4873,12 @@
     "title": "Working with V-Dem Data",
     "section": "APIs for IA",
     "text": "APIs for IA\n\n\nAPIs are accessed through packages in R\nMuch easier than reading in data from messy flat file!\nHere are a few examples:\n\nWorld Bank data through wbstats or WDI\ncountrycode for country codes\neurostat for data on Europe\n\nBut there are many APIs out there (please explore!)"
+  },
+  {
+    "objectID": "slides/week-3.2.html#what-did-we-just-do-1",
+    "href": "slides/week-3.2.html#what-did-we-just-do-1",
+    "title": "Sampling and Uncertainty",
+    "section": "What did we just do?",
+    "text": "What did we just do?\n\n\nWe completed this task many times\nThis produced a sampling distribution of our estimates\nThere is a distribution of estimates because of sampling variability\nDue to random chance, one estimate from one sample can differ from another\nThese are foundational ideas for statistical inference that we are going to keep building on"
   }
 ]

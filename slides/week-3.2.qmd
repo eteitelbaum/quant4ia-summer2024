@@ -125,7 +125,7 @@ ggplot(mnm_data, aes(x = proportion_blue)) +
 -   **statistical inference:** act of making a guess about a **population** using information from a **sample**
 :::
 
-## What have we just done?
+## What did we just do?
 
 ::: incremental
 -   We completed this task many times
