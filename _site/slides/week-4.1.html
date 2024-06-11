@@ -11,7 +11,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.533">
 
-  <meta name="dcterms.date" content="2024-05-14">
+  <meta name="dcterms.date" content="2024-06-11">
   <title>IAFF 6501–Spring 2024 Schedule - Hypothesis Testing 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -406,7 +406,7 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">May 14, 2024</p>
+  <p class="date">June 11, 2024</p>
 </section>
 <section id="jobs-training-programs" class="slide level2">
 <h2>Jobs Training Programs</h2>
@@ -419,7 +419,7 @@
 </section>
 <section id="todays-code" class="slide level2">
 <h2>Today’s Code</h2>
-<p><a href="https://www.dropbox.com/scl/fo/g4tdpdwcij78nyydvr4bp/h?rlkey=hctskhle6222csnwre5ir9gz3&amp;dl=0" class="uri">https://www.dropbox.com/scl/fo/g4tdpdwcij78nyydvr4bp/h?rlkey=hctskhle6222csnwre5ir9gz3&amp;dl=0</a></p>
+<p><a href="https://www.dropbox.com/scl/fo/k6q8n5lbwbff6j0h5vvs1/AK9Ibhnd8t3rxV5FneYf8AU?rlkey=zo2rejko587tfvoq8tterd44r&amp;dl=0" class="uri">https://www.dropbox.com/scl/fo/k6q8n5lbwbff6j0h5vvs1/AK9Ibhnd8t3rxV5FneYf8AU?rlkey=zo2rejko587tfvoq8tterd44r&amp;dl=0</a></p>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -724,6 +724,34 @@ Null Hypothesis: point
 <h2>Visualizing the p-value</h2>
 
 <img data-src="week-4.1_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:50.0%" class="r-stretch"></section>
+<section id="p-value-using-infer" class="slide level2">
+<h2>p-value using <code>infer</code></h2>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">library</span>(infer)</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a><span class="co"># calculate the p-value from null distribution</span></span>
+<span id="cb18-4"><a></a>p_value <span class="ot">&lt;-</span> null_dist <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a></a>  <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> <span class="dv">15</span><span class="sc">/</span><span class="dv">60</span>, <span class="at">direction =</span> <span class="st">"less"</span>)</span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.238</code></pre>
+</div>
+</div>
+</section>
+<section id="visualing-the-p-value-using-infer" class="slide level2">
+<h2>Visualing the p-value using <code>infer</code></h2>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">visualize</span>(null_dist) <span class="sc">+</span></span>
+<span id="cb20-2"><a></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> <span class="dv">15</span><span class="sc">/</span><span class="dv">60</span>, <span class="at">direction =</span> <span class="st">"less"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="week-4.1_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="significance-level" class="slide level2 smaller">
 <h2>“Significance” level</h2>
 <p><br></p>
