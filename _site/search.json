@@ -598,7 +598,7 @@
     "href": "slides/week-4.2.html#section-5",
     "title": "Hypothesis Testing 2",
     "section": "",
-    "text": "Now, let’s tidy the data for plotting.\n\n\nplotData &lt;- tibble(\n  race = c(\"Black\", \"White\"),\n  meanCalls = c(mean_black, mean_white),\n  lower95 = c(lower_bound_black, lower_bound_white),\n  upper95 = c(upper_bound_black, upper_bound_white)\n)\nplotData\n\n# A tibble: 2 × 4\n  race  meanCalls lower95 upper95\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Black    0.0645  0.0550  0.0743\n2 White    0.0965  0.0850  0.108"
+    "text": "Now, let’s tidy the data for plotting.\n\n\nplotData &lt;- tibble(\n  race = c(\"Black\", \"White\"),\n  meanCalls = c(mean_black, mean_white),\n  lower95 = c(lower_bound_black, lower_bound_white),\n  upper95 = c(upper_bound_black, upper_bound_white)\n)\nplotData\n\n# A tibble: 2 × 4\n  race  meanCalls lower95 upper95\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Black    0.0645  0.0546  0.0743\n2 White    0.0965  0.0850  0.108"
   },
   {
     "objectID": "slides/week-4.2.html#plot",
@@ -4922,5 +4922,19 @@
     "title": "Hypothesis Testing 1",
     "section": "Visualing the p-value using infer",
     "text": "Visualing the p-value using infer\n\n\nvisualize(null_dist) +\n  shade_p_value(obs_stat = 15/60, direction = \"less\")"
+  },
+  {
+    "objectID": "slides/week-4.2.html#get-the-p-value",
+    "href": "slides/week-4.2.html#get-the-p-value",
+    "title": "Hypothesis Testing 2",
+    "section": "Get the p-value",
+    "text": "Get the p-value\n\nLet’s get the p-value with get_pvalue from the infer package.\n\n\nget_p_value(null_dist, obs_stat = teffect, direction = \"greater\")\n\n# A tibble: 1 × 1\n  p_value\n    &lt;dbl&gt;\n1  0.0002"
+  },
+  {
+    "objectID": "slides/week-4.2.html#visualize-the-null-distribution",
+    "href": "slides/week-4.2.html#visualize-the-null-distribution",
+    "title": "Hypothesis Testing 2",
+    "section": "Visualize the Null Distribution",
+    "text": "Visualize the Null Distribution\n\n\nvisualize(null_dist) +\n  shade_p_value(obs_stat = teffect, direction = \"greater\") +\n  labs(\n    x = \"Estimated Difference under the Null\",\n    y = \"Count\"\n  ) + \n  theme_bw()"
   }
 ]
