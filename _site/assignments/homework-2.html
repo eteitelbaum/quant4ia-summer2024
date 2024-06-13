@@ -423,10 +423,12 @@ div.csl-indent {
   <li><a href="#load-data-and-packages" id="toc-load-data-and-packages" class="nav-link" data-scroll-target="#load-data-and-packages">Load Data and Packages</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#part-1-setup-and-load-data-10-points" id="toc-part-1-setup-and-load-data-10-points" class="nav-link" data-scroll-target="#part-1-setup-and-load-data-10-points">Part 1: Setup and Load Data (10 points)</a></li>
-  <li><a href="#part-2-generate-estimates-and-95-percent-confidence-intervals-30-points" id="toc-part-2-generate-estimates-and-95-percent-confidence-intervals-30-points" class="nav-link" data-scroll-target="#part-2-generate-estimates-and-95-percent-confidence-intervals-30-points">Part 2: Generate Estimates and 95 Percent Confidence Intervals (30 points)</a></li>
-  <li><a href="#part-3-graph-your-estimates-and-confidence-intervals-20-points" id="toc-part-3-graph-your-estimates-and-confidence-intervals-20-points" class="nav-link" data-scroll-target="#part-3-graph-your-estimates-and-confidence-intervals-20-points">Part 3: Graph your estimates and confidence intervals (20 points)</a></li>
-  <li><a href="#part-4-conduct-hypothesis-tests-30-points" id="toc-part-4-conduct-hypothesis-tests-30-points" class="nav-link" data-scroll-target="#part-4-conduct-hypothesis-tests-30-points">Part 4: Conduct Hypothesis Tests (30 points)</a></li>
-  <li><a href="#part-5-interpretation-and-conclusion-10-points" id="toc-part-5-interpretation-and-conclusion-10-points" class="nav-link" data-scroll-target="#part-5-interpretation-and-conclusion-10-points">Part 5: Interpretation and Conclusion (10 points)</a></li>
+  <li><a href="#part-2-calculate-the-treatment-effect-of-a-variable-16-points" id="toc-part-2-calculate-the-treatment-effect-of-a-variable-16-points" class="nav-link" data-scroll-target="#part-2-calculate-the-treatment-effect-of-a-variable-16-points">Part 2: Calculate the Treatment Effect of a Variable (16 points)</a></li>
+  <li><a href="#part-3-state-your-hypotheses-16-points" id="toc-part-3-state-your-hypotheses-16-points" class="nav-link" data-scroll-target="#part-3-state-your-hypotheses-16-points">Part 3: State Your Hypotheses (16 points)</a></li>
+  <li><a href="#part-4-generate-the-null-distribution-16-points" id="toc-part-4-generate-the-null-distribution-16-points" class="nav-link" data-scroll-target="#part-4-generate-the-null-distribution-16-points">Part 4: Generate the Null Distribution (16 points)</a></li>
+  <li><a href="#part-5-get-the-p-value-16-points" id="toc-part-5-get-the-p-value-16-points" class="nav-link" data-scroll-target="#part-5-get-the-p-value-16-points">Part 5: Get the p-value (16 points)</a></li>
+  <li><a href="#part-6-visualize-the-treatment-effect-16-points" id="toc-part-6-visualize-the-treatment-effect-16-points" class="nav-link" data-scroll-target="#part-6-visualize-the-treatment-effect-16-points">Part 6: Visualize the Treatment Effect (16 points)</a></li>
+  <li><a href="#part-7-interpret-the-results-10-points" id="toc-part-7-interpret-the-results-10-points" class="nav-link" data-scroll-target="#part-7-interpret-the-results-10-points">Part 7: Interpret the Results (10 points)</a></li>
   <li><a href="#extra-credit" id="toc-extra-credit" class="nav-link" data-scroll-target="#extra-credit">Extra Credit</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/eteitelbaum/dataviz-summer-2023/edit/main/assignments/homework-2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/eteitelbaum/dataviz-summer-2023/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -505,54 +507,38 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="part-1-setup-and-load-data-10-points">Part 1: Setup and Load Data (10 points)</h2>
 <ul>
 <li>Create a folder and an RProj file for this assignment. Save “gobifo_data.csv” in that folder. Create a new Quarto document where you will complete the work for this assignment. Make sure to include a title, your name, and the date. (1 point)</li>
-<li>Create a code chunk that loads the packages you will need: <code>tidyverse</code> and <code>tidymodels</code> (1 point)</li>
-<li>Use read_csv() to read the “gobifo_data.csv” data in to RStudio. Save the dataset as an object called “myData” (3 points)</li>
-<li>Examine the data. How many observations (villages) are there in the study? You can use glimpse() to determine the number of rows. How many were in the treatment (<strong>t</strong>) group (in the program) and how many were in control? You can use summarize() for this calculation. (5 points)</li>
+<li>Create a code chunk that loads the packages you will need: <code>tidyverse</code> and <code>tidymodels</code></li>
+<li>Use read_csv() to read the “gobifo_data.csv” data in to RStudio. Save the dataset as an object called “myData”</li>
+<li>Examine the data. How many observations (villages) are there in the study? You can use glimpse() to determine the number of rows. How many were in the treatment (<strong>t</strong>) group (in the program) and how many were in control? You can use summarize() or count() for this calculation.</li>
 </ul>
 </section>
-<section id="part-2-generate-estimates-and-95-percent-confidence-intervals-30-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-generate-estimates-and-95-percent-confidence-intervals-30-points">Part 2: Generate Estimates and 95 Percent Confidence Intervals (30 points)</h2>
-<p>There are five response variables in the data. Each of these corresponds to a different outcome of interest: village decision making infrastructure (vdc), public goods (f_psch), inclusion/gender equality (role_wmn), social capital and trust (trust_own), and social conflict (no_conflict).</p>
-<ul>
-<li>For each of the outcomes: use group_by() and summarize() to calculate the mean of each response variable in both treatment and control villages. (5 points)</li>
-<li>Select TWO outcome variables of interest to you. For each, use <code>tidymodels</code> to generate 95 percent confidence intervals around these estimates. You should do this for villages in treatment and control separately. (10 points)</li>
-<li>Store your estimates and the upper and lower bounds of your confidence intervals for future use. Label this object <code>estimates</code>. (5 points)</li>
-<li>Write a short paragraph that correctly interprets the confidence intervals in treatment and control groups for both outcomes you selected. Based on your confidence intervals, what is your initial conclusion about whether the program had an impact on the outcome variables you selected. (10 points)</li>
-</ul>
+<section id="part-2-calculate-the-treatment-effect-of-a-variable-16-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-calculate-the-treatment-effect-of-a-variable-16-points">Part 2: Calculate the Treatment Effect of a Variable (16 points)</h2>
+<p>Choose one variable other than VDCs (which we already did in class). Calculate the means and treatment effect of your chosen variable.</p>
 </section>
-<section id="part-3-graph-your-estimates-and-confidence-intervals-20-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-graph-your-estimates-and-confidence-intervals-20-points">Part 3: Graph your estimates and confidence intervals (20 points)</h2>
-<ul>
-<li>For both outcomes you chose, graph your estimate and 95 percent confidence interval in treatment and control groups. You can produce a bar plot or use geom_point, whichever you think best displays the information. This should generate 2 separate graphs, one for each outcome. For full credit, produce graphs that you could use professionally: that is, these graphs should use appropriate labels, colors, and a nice theme (15 points)
-<ul>
-<li>Bonus 2 points if you can figure out how to include all of this information on one graph!</li>
-</ul></li>
-<li>Write a short paragraph interpreting the graphs: what do they teach us about the impact of the program on the two outcomes in treatment vs control. (5 points)</li>
-</ul>
+<section id="part-3-state-your-hypotheses-16-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-state-your-hypotheses-16-points">Part 3: State Your Hypotheses (16 points)</h2>
+<p>What is your null hypothesis for the effect of your chosen variable? What is your alternative hypothesis?</p>
 </section>
-<section id="part-4-conduct-hypothesis-tests-30-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-conduct-hypothesis-tests-30-points">Part 4: Conduct Hypothesis Tests (30 points)</h2>
-<p>In this section, you wil conduct hypothesis tests that assess whether the GoBifo program had an impact.</p>
-<ul>
-<li>For the two outcomes you selected: Clearly state the null hypothesis and the alternative hypothesis for each test. Write these out in a list. (5 points)</li>
-<li>For each outcome, calculate the treatment effect of the program: this is the mean in treatment minus the mean in control. What are the treatment effects? (5 points)</li>
-<li>For each outcome, use <code>tidymodels</code> to conduct a hypothesis test to assess whether the treatment effects you estimate are likely to be due to chance. For each, produce the p-value. (10 points)</li>
-<li>Select one outcome: make a histogram of the null distribution from your hypothesis test. Adjust the bar width as needed. Include a dotted vertical line with your estimate on the plot. Generally, what does this graph tell you about how likely your treatment effect is to be due to chance alone? (5 points)</li>
-<li>Interpret both p-values in language that people who know nothing about statistics might understand. For each outcome (response) variable, do you reject the null hypothesis? (5 points)</li>
-</ul>
+<section id="part-4-generate-the-null-distribution-16-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-generate-the-null-distribution-16-points">Part 4: Generate the Null Distribution (16 points)</h2>
+<p>Using tidymodels, generate a null distribution for the treatment effect of your chosen variable.</p>
 </section>
-<section id="part-5-interpretation-and-conclusion-10-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-5-interpretation-and-conclusion-10-points">Part 5: Interpretation and Conclusion (10 points)</h2>
-<p>Write 2-3 paragraphs that summarize the results of your analysis and accurately interpret them. What is the big picture takeaway of your analysis? What does your analysis teach us about the impact of this CDD program? Are there policy or program implications of the findings for CDD in post-conflict settings?</p>
+<section id="part-5-get-the-p-value-16-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-get-the-p-value-16-points">Part 5: Get the p-value (16 points)</h2>
+<p>Use the <code>get_p_value()</code> function from the <code>infer</code> package to calculate the p-value for your chosen variable.</p>
+</section>
+<section id="part-6-visualize-the-treatment-effect-16-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-visualize-the-treatment-effect-16-points">Part 6: Visualize the Treatment Effect (16 points)</h2>
+<p>Use the <code>visualize()</code> function from the <code>infer</code> package to visualize the treatment effect of your chosen variable relative to the null distribution.</p>
+</section>
+<section id="part-7-interpret-the-results-10-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-7-interpret-the-results-10-points">Part 7: Interpret the Results (10 points)</h2>
+<p>Write one or two paragraphs that summarize the results of your analysis and accurately interpret them. What is the big picture takeaway of your analysis? What does your analysis teach us about the impact of this CDD program based on the variable you chose?</p>
 </section>
 <section id="extra-credit" class="level2">
 <h2 class="anchored" data-anchor-id="extra-credit">Extra Credit</h2>
-<ul>
-<li>There are three outcome variables you did not select: create visualizions that display the means and 95% confidence intervals in treatment and control groups for these three outcomes. (2 points)</li>
-<li>Conduct hypothesis tests for each the three additional outcomes. What do you conclude from each test? (2 points)</li>
-<li>Write a paragraph updating your conclusion about the impact of the program and your interpretation of all of the evidence (2 points)</li>
-<li>Create a single visualization that could “tell the whole story” of the results from this study. (3 points)</li>
-</ul>
+<p>There are three outcome variables you did not select: create visualizations that display the means and 95% confidence intervals in treatment and control groups for these three outcomes.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -563,8 +549,8 @@ Submission Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Head over to Blackboard and go to the Homework 2 assignment. There you will find a link that you can use to upload your <strong>project folder</strong>.</p>
-<p>If you worked with a partner, only one of you should submit the <strong>project folder</strong> but both of you should still make a submission to Blackboard so that we have a submission to grade. If you have worked with someoone but still have a substantially different project, you can submit separately.</p>
+<p>Head over to Blackboard and go to the Homework 2 assignment. There you will find a link that you can use to upload your <strong>project folder</strong>. Alternatively you can do the assignment on Posit Cloud.</p>
+<p>If you worked with a partner, only one of you should submit the <strong>project folder</strong> but both of you should still make a submission to Blackboard so that we have a submission to grade.</p>
 <p>The person submitting the project folder should take a screen shot of the confirmation message (“Finished Uploading”) and share it with the other group members. This screen shot will be what you submit in Blackboard.</p>
 <p>Next, click “Create Submission” and write a statement stating whether you worked on the project independently or whether you are submitting jointly with someone else. Also note whether you used a large language model (LLM) like ChatGPT to help you with the work and which parts of the assignment you used the LLM for. It is fine to use an LLM to help with your code but you must acknowledge the use of it in your submission.</p>
 <p>Then, upload the screenshot you saved in the first step. Now submit the assignment.</p>

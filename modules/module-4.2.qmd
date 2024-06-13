@@ -125,7 +125,7 @@ Now we can get about the business of testing our hypothesis that the program had
 
 **Alternative Hypothesis:** The mean of VDCs in the treatment group is not equal to the mean of VDCs in the control group. Or, in other words, the program had an impact on VDCs.
 
-Now we can use the `infer` package to conduct a hypothesis test. First we specify the response variable, which in this case is the VDC variable, and the explanatory variable, which is the treatment variable. Then we hypothesize that the two variables are independent of each other. Next, we generate a null distribution by permuting the treatment variable and calculating the difference in means between the treatment and control groups. Finally, we calculate the p-value by comparing the observed treatment effect to the null distribution.
+Now we can use `tidymodels` to conduct a hypothesis test. First we specify the response variable, which in this case is the VDC variable, and the explanatory variable, which is the treatment variable. Then we hypothesize that the two variables are independent of each other. Next, we generate a null distribution by permuting the treatment variable and calculating the difference in means between the treatment and control groups. Finally, we calculate the p-value by comparing the observed treatment effect to the null distribution.
 
 ```{r}
 #| label: hypothesis_test_vdc
