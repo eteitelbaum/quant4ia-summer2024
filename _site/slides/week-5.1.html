@@ -11,7 +11,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.533">
 
-  <meta name="dcterms.date" content="2024-05-14">
+  <meta name="dcterms.date" content="2024-06-18">
   <title>IAFF 6501–Spring 2024 Schedule - Linear Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -405,20 +405,20 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">May 14, 2024</p>
+  <p class="date">June 18, 2024</p>
 </section>
 <section id="modeling" class="slide level2">
 <h2>Modeling</h2>
 <div>
 <ul>
 <li class="fragment">Use models to explain the relationship between variables and to make predictions</li>
-<li class="fragment">Explaining relationships [usually interested in causal relationships, but not always]
+<li class="fragment">Explaining relationships (usually interested in causal relationships, but not always)
 <ul>
 <li class="fragment">Does oil wealth impact regime type?</li>
 </ul></li>
 <li class="fragment">Predictive modeling
 <ul>
-<li class="fragment">Where is violence most likely to happen in [country X] during their next election?</li>
+<li class="fragment">Where is violence most likely to happen in (country X) during their next election?</li>
 <li class="fragment">Is this email spam?</li>
 </ul></li>
 </ul>
@@ -427,11 +427,11 @@
 <section id="modeling-1" class="slide level2">
 <h2>Modeling</h2>
 
-<img data-src="week-5.1_files/figure-html/linear-model-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/linear-model-1.png" width="960" class="r-stretch"></section>
 <section id="modeling-2" class="slide level2">
 <h2>Modeling</h2>
 
-<img data-src="week-5.1_files/figure-html/nonlinear-model-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/nonlinear-model-1.png" width="960" class="r-stretch"></section>
 <section>
 <section id="example-gdp-per-capita-and-democracy" class="title-slide slide level1 center">
 <h1>Example: GDP per capita and Democracy</h1>
@@ -440,7 +440,6 @@
 <section id="pull-in-the-vdem-data" class="slide level2">
 <h2>Pull in the VDEM Data</h2>
 <p><br></p>
-<p>What is this code doing?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(vdemdata)</span>
 <span id="cb1-2"><a></a></span>
@@ -457,7 +456,7 @@
 <pre><code>Rows: 179
 Columns: 4
 $ country    &lt;chr&gt; "Mexico", "Suriname", "Sweden", "Switzerland", "Ghana", "So…
-$ lib_dem    &lt;dbl&gt; 0.433, 0.593, 0.875, 0.870, 0.614, 0.601, 0.754, 0.267, 0.1…
+$ lib_dem    &lt;dbl&gt; 0.434, 0.580, 0.871, 0.866, 0.615, 0.607, 0.755, 0.260, 0.1…
 $ wealth     &lt;dbl&gt; 16.814, 11.752, 48.804, 56.110, 5.608, 11.345, 39.061, 5.69…
 $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 2.42…</code></pre>
 </div>
@@ -466,11 +465,11 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <section id="plot-the-relationship" class="slide level2">
 <h2>Plot the Relationship</h2>
 
-<img data-src="week-5.1_files/figure-html/plot-wealth-dem-1-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/plot-wealth-dem-1-1.png" width="960" class="r-stretch"></section>
 <section id="plot-the-relationship-1" class="slide level2">
 <h2>Plot the Relationship</h2>
 
-<img data-src="week-5.1_files/figure-html/plot-wealth-dem-2-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/plot-wealth-dem-2-1.png" width="960" class="r-stretch"></section>
 <section id="plot-the-relationship-2" class="slide level2">
 <h2>Plot the Relationship</h2>
 <p><br></p>
@@ -485,7 +484,7 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <section id="using-the-scales-package" class="slide level2">
 <h2>Using the Scales Package</h2>
 
-<img data-src="week-5.1_files/figure-html/plot-wealth-dem-4-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/plot-wealth-dem-4-1.png" width="960" class="r-stretch"></section>
 <section id="using-the-scales-package-1" class="slide level2">
 <h2>Using the Scales Package</h2>
 <p><br></p>
@@ -506,13 +505,13 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <div>
 <ul>
 <li class="fragment">We can represent relationships between variables using <strong>functions</strong></li>
-<li class="fragment">A function is a mathematical concept: the relationship between an output and one or more inputs
+<li class="fragment">A function is a rule or set of rules that maps input values to output values
 <ul>
 <li class="fragment">Plug in the inputs and receive back the output</li>
 </ul></li>
-<li class="fragment">Example: The formula <span class="math inline">\(y = 3x + 7\)</span> is a function with input <span class="math inline">\(x\)</span> and output <span class="math inline">\(y\)</span>.
+<li class="fragment">Example: The formula <span class="math inline">\(y = 3x + 7\)</span> is a function with input <span class="math inline">\(x\)</span> and output <span class="math inline">\(y\)</span>
 <ul>
-<li class="fragment">If <span class="math inline">\(x\)</span> is <span class="math inline">\(5\)</span>, <span class="math inline">\(y\)</span> is <span class="math inline">\(22\)</span>,</li>
+<li class="fragment">If <span class="math inline">\(x\)</span> is <span class="math inline">\(5\)</span>, <span class="math inline">\(y\)</span> is <span class="math inline">\(22\)</span></li>
 <li class="fragment"><span class="math inline">\(y = 3 \times 5 + 7 = 22\)</span></li>
 </ul></li>
 </ul>
@@ -523,13 +522,13 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <p><br></p>
 <div>
 <ul>
-<li class="fragment"><strong>Response variable:</strong> Variable whose behavior or variation you are trying to understand, on the y-axis in the plot
+<li class="fragment"><strong>Response variable:</strong> Variable whose behavior or variation you are trying to understand, on the y-axis in the plot (the <strong>output</strong>)
 <ul>
 <li class="fragment"><strong>Dependent</strong> variable</li>
 <li class="fragment"><strong>Outcome</strong> variable</li>
 <li class="fragment"><strong>Y</strong> variable</li>
 </ul></li>
-<li class="fragment"><strong>Explanatory variables:</strong> Other variables that you want to use to explain the variation in the response, on the x-axis in the plot
+<li class="fragment"><strong>Explanatory variables:</strong> Other variables that you want to use to explain the variation in the response, on the x-axis in the plot (the <strong>input</strong>)
 <ul>
 <li class="fragment"><strong>Independent</strong> variables</li>
 <li class="fragment"><strong>Predictors</strong></li>
@@ -547,7 +546,7 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <li class="fragment"><span class="math inline">\(Y\)</span> is the outcome variable</li>
 <li class="fragment"><span class="math inline">\(X\)</span> is the explanatory variable</li>
 <li class="fragment"><span class="math inline">\(a\)</span> is the intercept: the predicted value of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> is equal to 0</li>
-<li class="fragment"><span class="math inline">\(b\)</span> is the slope of the line [remember rise over run!]</li>
+<li class="fragment"><span class="math inline">\(b\)</span> is the slope of the line (remember rise over run!)</li>
 </ul>
 </div>
 </section>
@@ -572,13 +571,13 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <section id="residuals" class="slide level2">
 <h2>Residuals</h2>
 
-<img data-src="week-5.1_files/figure-html/unnamed-chunk-10-1.png" style="width:60.0%" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:60.0%" class="r-stretch"></section>
 <section id="linear-model" class="slide level2">
 <h2>Linear Model</h2>
 <p><span class="math inline">\(\hat{Y} = a  + b \times X\)</span></p>
 <p><span class="math inline">\(\hat{Y} = 0.13  + 0.12 \times X\)</span></p>
 
-<img data-src="week-5.1_files/figure-html/unnamed-chunk-11-1.png" style="width:100.0%" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%" class="r-stretch"></section>
 <section id="linear-model-interpretation" class="slide level2">
 <h2>Linear Model: Interpretation</h2>
 <p><br></p>
@@ -623,15 +622,15 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <section id="linear-model-interpretation-3" class="slide level2">
 <h2>Linear Model: Interpretation</h2>
 
-<img data-src="week-5.1_files/figure-html/unnamed-chunk-12-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="linear-model-interpretation-4" class="slide level2">
 <h2>Linear Model: Interpretation</h2>
 
-<img data-src="week-5.1_files/figure-html/unnamed-chunk-13-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="linear-model-interpretation-5" class="slide level2">
 <h2>Linear Model: Interpretation</h2>
 
-<img data-src="week-5.1_files/figure-html/unnamed-chunk-14-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
 <section id="linear-model-interpretation-6" class="slide level2">
 <h2>Linear Model: Interpretation</h2>
 <p><br></p>
@@ -679,76 +678,40 @@ $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 
 <section id="linear-model-with-single-predictor-1" class="slide level2">
 <h2>Linear Model with Single Predictor</h2>
 
-<img data-src="week-5.1_files/figure-html/model-data-1.png" width="672" class="r-stretch"></section></section>
+<img data-src="week-5.1_files/figure-revealjs/model-data-1.png" width="960" class="r-stretch"></section></section>
 <section>
-<section id="estimate-model-using-tidymodels" class="title-slide slide level1 center">
-<h1>Estimate Model using Tidymodels</h1>
+<section id="estimate-model" class="title-slide slide level1 center">
+<h1>Estimate Model</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>model1 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(lib_dem <span class="sc">~</span> log_wealth, <span class="at">data =</span> modelData) </span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lib_dem ~ log_wealth, data = modelData)
 
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.57441 -0.14334  0.03911  0.18730  0.37017 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.13051    0.03806   3.429 0.000758 ***
+log_wealth   0.12040    0.01471   8.188 5.75e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2233 on 172 degrees of freedom
+  (5 observations deleted due to missingness)
+Multiple R-squared:  0.2805,    Adjusted R-squared:  0.2763 
+F-statistic: 67.04 on 1 and 172 DF,  p-value: 5.754e-14</code></pre>
+</div>
+</div>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p><br></p>
-<p>Step 1: Specify model</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">linear_reg</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p><br></p>
-<p>Step 2: Set model fitting <em>engine</em></p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="co"># lm: linear model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<p><br></p>
-<p>Step 3: Fit model &amp; estimate parameters</p>
-<p><bt></bt></p>
-<p>… using <strong>formula syntax</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a></a>  <span class="fu">fit</span>(lib_dem <span class="sc">~</span> log_wealth, <span class="at">data =</span> modelData) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>parsnip model object
-
-
-Call:
-stats::lm(formula = lib_dem ~ log_wealth, data = data)
-
-Coefficients:
-(Intercept)   log_wealth  
-     0.1327       0.1197  </code></pre>
-</div>
-</div>
-</section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<p><br></p>
-<p>Step 4: Tidy things up…</p>
-<p><br></p>
-<p><span class="math display">\[\widehat{Democracy}_{i} = 0.13 + 0.12 * {loggdppc}_{i}\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a></a>  <span class="fu">fit</span>(lib_dem <span class="sc">~</span> log_wealth, <span class="at">data =</span> modelData) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic  p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)    0.133    0.0380      3.49 6.04e- 4
-2 log_wealth     0.120    0.0147      8.16 6.97e-14</code></pre>
-</div>
-</div>
-</section>
-<section id="interpretation" class="slide level2">
-<h2>Interpretation?</h2>
+<p>In equation form… How do we interpret the model?</p>
 <p><br></p>
 <p><span class="math display">\[\widehat{Democracy}_{i} = 0.13 + 0.12 * {loggdppc}_{i}\]</span></p>
 </section>
@@ -760,11 +723,11 @@ Coefficients:
 <section id="how-would-you-draw-the-best-line" class="slide level2">
 <h2>How would you draw the “best” line?</h2>
 
-<img data-src="week-5.1_files/figure-html/best-line-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line-1.png" width="960" class="r-stretch"></section>
 <section id="how-would-you-draw-the-best-line-1" class="slide level2">
 <h2>How would you draw the “best” line?</h2>
 
-<img data-src="week-5.1_files/figure-html/best-line2-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line2-1.png" width="960" class="r-stretch"></section>
 <section id="least-squares-regression" class="slide level2">
 <h2>Least squares regression</h2>
 <p><br></p>
@@ -802,33 +765,33 @@ Coefficients:
 <section id="least-squares-regression-2" class="slide level2">
 <h2>Least squares regression</h2>
 
-<img data-src="week-5.1_files/figure-html/best-line3-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line3-1.png" width="960" class="r-stretch"></section>
 <section id="very-simple-example" class="slide level2">
 <h2>Very Simple Example</h2>
 <p>What should the slope and intercept be?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line4-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line4-1.png" width="960" class="r-stretch"></section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <p><span class="math inline">\(\hat{Y} = 0 + 1*X\)</span></p>
 
-<img data-src="week-5.1_files/figure-html/best-line5-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line5-1.png" width="960" class="r-stretch"></section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
 <p>What is the sum of squared residuals?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line6-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line6-1.png" width="960" class="r-stretch"></section>
 <section id="example-2" class="slide level2">
 <h2>Example</h2>
 <p>What is sum of squared residuals for <span class="math inline">\(y = 0 + 0*X\)</span>?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line7-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line7-1.png" width="960" class="r-stretch"></section>
 <section id="example-3" class="slide level2">
 <h2>Example</h2>
 <p>What is sum of squared residuals for <span class="math inline">\(y = 0 + 0*X\)</span>?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line8-1.png" width="672" class="r-stretch"><div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>(<span class="dv">1-0</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2-0</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3-0</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img data-src="week-5.1_files/figure-revealjs/best-line8-1.png" width="960" class="r-stretch"><div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>(<span class="dv">1-0</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2-0</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3-0</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 14</code></pre>
 </div>
@@ -838,13 +801,13 @@ Coefficients:
 <h2>Example</h2>
 <p>What is sum of squared residuals for <span class="math inline">\(y = 0 + 2*X\)</span>?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line10-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line10-1.png" width="960" class="r-stretch"></section>
 <section id="example-5" class="slide level2">
 <h2>Example</h2>
 <p>What is sum of squared residuals for <span class="math inline">\(y = 0 + 2*X\)</span>?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line11-1.png" width="672" class="r-stretch"><div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>(<span class="dv">1-2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2-4</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3-6</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img data-src="week-5.1_files/figure-revealjs/best-line11-1.png" width="960" class="r-stretch"><div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>(<span class="dv">1-2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2-4</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3-6</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 14</code></pre>
 </div>
@@ -854,13 +817,13 @@ Coefficients:
 <h2>One more…</h2>
 <p>What is sum of squared residuals for <span class="math inline">\(y = 0 + -1*X\)</span>?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line13-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/best-line13-1.png" width="960" class="r-stretch"></section>
 <section id="one-more-1" class="slide level2">
 <h2>One more…</h2>
 <p>What is sum of squared residuals for <span class="math inline">\(y = 0 + -1*X\)</span>?</p>
 
-<img data-src="week-5.1_files/figure-html/best-line14-1.png" width="672" class="r-stretch"><div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>(<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3</span><span class="sc">+</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img data-src="week-5.1_files/figure-revealjs/best-line14-1.png" width="960" class="r-stretch"><div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>(<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">3</span><span class="sc">+</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 56</code></pre>
 </div>
@@ -870,7 +833,7 @@ Coefficients:
 <h2>Cost Function</h2>
 <p>Sum of Squared Residuals as function of possible values of <span class="math inline">\(b\)</span></p>
 
-<img data-src="week-5.1_files/figure-html/cost-function-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/cost-function-1.png" width="960" class="r-stretch"></section>
 <section id="least-squares-regression-3" class="slide level2">
 <h2>Least Squares Regression</h2>
 <p><br></p>
@@ -895,11 +858,11 @@ Coefficients:
 <section id="least-squares-regression-5" class="slide level2">
 <h2>Least Squares Regression</h2>
 
-<img data-src="week-5.1_files/figure-html/ssr-viz-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/ssr-viz-1.png" width="960" class="r-stretch"></section>
 <section id="least-squares-regression-6" class="slide level2">
 <h2>Least Squares Regression</h2>
 
-<img data-src="week-5.1_files/figure-html/regression-line-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-5.1_files/figure-revealjs/regression-line-1.png" width="960" class="r-stretch"></section>
 <section id="your-turn" class="slide level2 smaller">
 <h2>Your Turn</h2>
 <p><br></p>
@@ -908,7 +871,7 @@ Coefficients:
 <ul>
 <li><p>V-Dem includes a Political Corruption Index, which aggregates corruption in a number of spheres (see codebook for details).</p></li>
 <li><p>The variable name is: <em>v2x_corr</em> : lower values mean less corruption</p></li>
-<li><p>See started code <a href="https://www.dropbox.com/scl/fo/8xpsrz27m0on1mc2pf5ya/h?rlkey=716y4lvy6uisq0gortq1as0sp&amp;dl=0">HERE</a></p></li>
+<li><p>See starter code <a href="../Users/ejt/Library/CloudStorage/Dropbox/classwork/quant4ia-summer24">in classwork folder</a></p></li>
 </ul>
 </section>
 <section id="your-turn-1" class="slide level2 smaller">
@@ -1168,6 +1131,44 @@ Coefficients:
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

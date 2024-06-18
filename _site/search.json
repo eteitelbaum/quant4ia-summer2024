@@ -3527,7 +3527,7 @@
     "href": "slides/week-5.1.html#modeling",
     "title": "Linear Regression",
     "section": "Modeling",
-    "text": "Modeling\n\n\nUse models to explain the relationship between variables and to make predictions\nExplaining relationships [usually interested in causal relationships, but not always]\n\nDoes oil wealth impact regime type?\n\nPredictive modeling\n\nWhere is violence most likely to happen in [country X] during their next election?\nIs this email spam?"
+    "text": "Modeling\n\n\nUse models to explain the relationship between variables and to make predictions\nExplaining relationships (usually interested in causal relationships, but not always)\n\nDoes oil wealth impact regime type?\n\nPredictive modeling\n\nWhere is violence most likely to happen in (country X) during their next election?\nIs this email spam?"
   },
   {
     "objectID": "slides/week-5.1.html#modeling-1",
@@ -3548,7 +3548,7 @@
     "href": "slides/week-5.1.html#pull-in-the-vdem-data",
     "title": "Linear Regression",
     "section": "Pull in the VDEM Data",
-    "text": "Pull in the VDEM Data\n\nWhat is this code doing?\n\nlibrary(vdemdata)\n\nmodelData &lt;- vdem |&gt;\n  filter(year == 2019) |&gt; \n  select(\n    country = country_name, \n    lib_dem = v2x_libdem, \n    wealth = e_gdppc) |&gt;\n  mutate(log_wealth = log(wealth))\n\nglimpse(modelData)\n\nRows: 179\nColumns: 4\n$ country    &lt;chr&gt; \"Mexico\", \"Suriname\", \"Sweden\", \"Switzerland\", \"Ghana\", \"So…\n$ lib_dem    &lt;dbl&gt; 0.433, 0.593, 0.875, 0.870, 0.614, 0.601, 0.754, 0.267, 0.1…\n$ wealth     &lt;dbl&gt; 16.814, 11.752, 48.804, 56.110, 5.608, 11.345, 39.061, 5.69…\n$ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 2.42…"
+    "text": "Pull in the VDEM Data\n\n\nlibrary(vdemdata)\n\nmodelData &lt;- vdem |&gt;\n  filter(year == 2019) |&gt; \n  select(\n    country = country_name, \n    lib_dem = v2x_libdem, \n    wealth = e_gdppc) |&gt;\n  mutate(log_wealth = log(wealth))\n\nglimpse(modelData)\n\nRows: 179\nColumns: 4\n$ country    &lt;chr&gt; \"Mexico\", \"Suriname\", \"Sweden\", \"Switzerland\", \"Ghana\", \"So…\n$ lib_dem    &lt;dbl&gt; 0.434, 0.580, 0.871, 0.866, 0.615, 0.607, 0.755, 0.260, 0.1…\n$ wealth     &lt;dbl&gt; 16.814, 11.752, 48.804, 56.110, 5.608, 11.345, 39.061, 5.69…\n$ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 2.42…"
   },
   {
     "objectID": "slides/week-5.1.html#plot-the-relationship",
@@ -3590,21 +3590,21 @@
     "href": "slides/week-5.1.html#models-as-functions",
     "title": "Linear Regression",
     "section": "Models as Functions",
-    "text": "Models as Functions\n\n\nWe can represent relationships between variables using functions\nA function is a mathematical concept: the relationship between an output and one or more inputs\n\nPlug in the inputs and receive back the output\n\nExample: The formula \\(y = 3x + 7\\) is a function with input \\(x\\) and output \\(y\\).\n\nIf \\(x\\) is \\(5\\), \\(y\\) is \\(22\\),\n\\(y = 3 \\times 5 + 7 = 22\\)"
+    "text": "Models as Functions\n\n\nWe can represent relationships between variables using functions\nA function is a rule or set of rules that maps input values to output values\n\nPlug in the inputs and receive back the output\n\nExample: The formula \\(y = 3x + 7\\) is a function with input \\(x\\) and output \\(y\\)\n\nIf \\(x\\) is \\(5\\), \\(y\\) is \\(22\\)\n\\(y = 3 \\times 5 + 7 = 22\\)"
   },
   {
     "objectID": "slides/week-5.1.html#quant-lingo",
     "href": "slides/week-5.1.html#quant-lingo",
     "title": "Linear Regression",
     "section": "Quant Lingo",
-    "text": "Quant Lingo\n\n\n\nResponse variable: Variable whose behavior or variation you are trying to understand, on the y-axis in the plot\n\nDependent variable\nOutcome variable\nY variable\n\nExplanatory variables: Other variables that you want to use to explain the variation in the response, on the x-axis in the plot\n\nIndependent variables\nPredictors"
+    "text": "Quant Lingo\n\n\n\nResponse variable: Variable whose behavior or variation you are trying to understand, on the y-axis in the plot (the output)\n\nDependent variable\nOutcome variable\nY variable\n\nExplanatory variables: Other variables that you want to use to explain the variation in the response, on the x-axis in the plot (the input)\n\nIndependent variables\nPredictors"
   },
   {
     "objectID": "slides/week-5.1.html#section",
     "href": "slides/week-5.1.html#section",
     "title": "Linear Regression",
     "section": "",
-    "text": "Linear model with one explanatory variable…\n\n\n\\(Y = a + bX\\)\n\\(Y\\) is the outcome variable\n\\(X\\) is the explanatory variable\n\\(a\\) is the intercept: the predicted value of \\(Y\\) when \\(X\\) is equal to 0\n\\(b\\) is the slope of the line [remember rise over run!]"
+    "text": "Linear model with one explanatory variable…\n\n\n\\(Y = a + bX\\)\n\\(Y\\) is the outcome variable\n\\(X\\) is the explanatory variable\n\\(a\\) is the intercept: the predicted value of \\(Y\\) when \\(X\\) is equal to 0\n\\(b\\) is the slope of the line (remember rise over run!)"
   },
   {
     "objectID": "slides/week-5.1.html#quant-lingo-1",
@@ -3709,7 +3709,7 @@
     "href": "slides/week-5.1.html#section-1",
     "title": "Linear Regression",
     "section": "",
-    "text": "Step 1: Specify model\n\n\nlinear_reg()"
+    "text": "In equation form… How do we interpret the model?\n\n\\[\\widehat{Democracy}_{i} = 0.13 + 0.12 * {loggdppc}_{i}\\]"
   },
   {
     "objectID": "slides/week-5.1.html#section-2",
@@ -3884,7 +3884,7 @@
     "href": "slides/week-5.1.html#your-turn",
     "title": "Linear Regression",
     "section": "Your Turn",
-    "text": "Your Turn\n\nAre democracies less corrupt?\n\n\nV-Dem includes a Political Corruption Index, which aggregates corruption in a number of spheres (see codebook for details).\nThe variable name is: v2x_corr : lower values mean less corruption\nSee started code HERE"
+    "text": "Your Turn\n\nAre democracies less corrupt?\n\n\nV-Dem includes a Political Corruption Index, which aggregates corruption in a number of spheres (see codebook for details).\nThe variable name is: v2x_corr : lower values mean less corruption\nSee starter code in classwork folder"
   },
   {
     "objectID": "slides/week-5.1.html#your-turn-1",

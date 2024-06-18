@@ -33,10 +33,10 @@ set.seed(1234)
 
 ::: {.incremental}
 - Use models to explain the relationship between variables and to make predictions
-- Explaining relationships [usually interested in causal relationships, but not always]
+- Explaining relationships (usually interested in causal relationships, but not always)
     - Does oil wealth impact regime type?
 - Predictive modeling
-    - Where is violence most likely to happen in [country X] during their next election?
+    - Where is violence most likely to happen in (country X) during their next election?
     - Is this email spam?
 :::
     
@@ -73,8 +73,6 @@ ggplot(df2, aes(x = x, y = y)) +
 ## Pull in the VDEM Data
 
 <br>
-
-What is this code doing?
 
 ```{r}
 #| label: wrangle-vdem
@@ -181,10 +179,10 @@ ggplot(modelData, aes(x = wealth, y = lib_dem)) +
 
 ::: {.incremental}
 - We can represent relationships between variables using **functions**
-- A function is a mathematical concept: the relationship between an output and one or more inputs
+- A function is a rule or set of rules that maps input values to output values
   - Plug in the inputs and receive back the output
-- Example: The formula $y = 3x + 7$ is a function with input $x$ and output $y$. 
-    - If $x$ is $5$, $y$ is $22$, 
+- Example: The formula $y = 3x + 7$ is a function with input $x$ and output $y$ 
+    - If $x$ is $5$, $y$ is $22$
     - $y = 3 \times 5 + 7 = 22$
 :::
 
@@ -193,11 +191,11 @@ ggplot(modelData, aes(x = wealth, y = lib_dem)) +
 <br>
 
 ::: {.incremental}
-- **Response variable:** Variable whose behavior or variation you are trying to understand, on the y-axis in the plot
+- **Response variable:** Variable whose behavior or variation you are trying to understand, on the y-axis in the plot (the **output**)
     - **Dependent** variable
     - **Outcome** variable
     - **Y** variable
-- **Explanatory variables:** Other variables that you want to use to explain the variation in the response, on the x-axis in the plot
+- **Explanatory variables:** Other variables that you want to use to explain the variation in the response, on the x-axis in the plot (the **input**)
     - **Independent** variables
     - **Predictors**
 :::
@@ -213,7 +211,7 @@ Linear model with one explanatory variable...
 - $Y$ is the outcome variable
 - $X$ is the explanatory variable
 - $a$ is the intercept: the predicted value of $Y$ when $X$ is equal to 0
-- $b$ is the slope of the line [remember rise over run!]
+- $b$ is the slope of the line (remember rise over run!)
 :::
 
 ## Quant Lingo {.smaller}
@@ -452,82 +450,20 @@ ggplot(modelData, aes(x = log_wealth, y = lib_dem)) +
   theme_bw()
 ```
 
-# Estimate Model using Tidymodels
-
-## 
-
-<br>
-
-Step 1: Specify model
-
-<br>
-
-```{r}
-#| label: specify-model
-#| echo: true
-#| eval: false
-
-linear_reg()
-```
-
-## 
-
-<br>
-
-Step 2: Set model fitting *engine*
-
-<br>
-
-```{r}
-#| label: set-engine
-#| echo: true
-#| eval: false
-
-linear_reg() |>
-  set_engine("lm") # lm: linear model
-```
-
-## 
-
-<br>
-
-Step 3: Fit model & estimate parameters
-
-<bt>
-
-... using **formula syntax**
+# Estimate Model 
 
 ```{r}
 #| label: fit-model
 #| echo: true
 
-linear_reg() |>
-  set_engine("lm") |>
-  fit(lib_dem ~ log_wealth, data = modelData) 
+model1 <-  lm(lib_dem ~ log_wealth, data = modelData) 
+
+summary(model1)
 ```
 
 ## 
 
-<br>
-
-Step 4: Tidy things up...
-
-<br>
-
-$$\widehat{Democracy}_{i} = 0.13 + 0.12 * {loggdppc}_{i}$$
-
-```{r}
-#| label: tidy-model
-#| echo: true
-
-linear_reg() |>
-  set_engine("lm") |>
-  fit(lib_dem ~ log_wealth, data = modelData) |>
-  tidy()
-```
-
-
-## Interpretation?
+In equation form... How do we interpret the model?
 
 <br>
 
@@ -551,7 +487,6 @@ ggplot(modelData, aes(x = log_wealth, y = lib_dem)) +
   labs(x = "GDP per capita", y = "Liberal Democracy Index") +
   theme_bw()
 ```
-
 
 ## How would you draw the "best" line?
 
@@ -882,7 +817,7 @@ Are democracies less corrupt?
 
 - The variable name is: *v2x_corr* : lower values mean less corruption
 
-- See started code [HERE](https://www.dropbox.com/scl/fo/8xpsrz27m0on1mc2pf5ya/h?rlkey=716y4lvy6uisq0gortq1as0sp&dl=0)
+- See starter code [in classwork folder](/Users/ejt/Library/CloudStorage/Dropbox/classwork/quant4ia-summer24)
 
 
 ## Your Turn {.smaller}
