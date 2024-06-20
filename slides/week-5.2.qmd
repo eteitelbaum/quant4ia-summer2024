@@ -102,11 +102,10 @@ ggplot(modelData, aes(x = polarization, y = libdem)) +
 ```{r}
 #| label: model1
 #| echo: true
+  
+model1 <- lm(libdem ~ polarization, data = modelData) 
 
-linear_reg() |>
-  set_engine("lm") |>
-  fit(libdem ~ polarization, data = modelData) |> 
-  tidy()
+summary(model1)
 ```
 <br>
 
@@ -121,10 +120,9 @@ linear_reg() |>
 #| label: model2
 #| echo: true
 
-linear_reg() |>
-  set_engine("lm") |>
-  fit(libdem ~ polarization + log_wealth, data = modelData) |> 
-  tidy()
+model2 <- lm(libdem ~ polarization + log_wealth, data = modelData) 
+
+summary(model2)
 ```
 
 ## Model with Two Predictors
@@ -190,10 +188,10 @@ $$\hat{Y_i} = a + b_1*Polarization + b_2*GDPpc + b_3*OilRents$$
 #| label: model3
 #| echo: true
 
-linear_reg() |>
-  set_engine("lm") |>
-  fit(libdem ~ polarization + log_wealth + oil_rents, data = modelData) |> 
-  tidy()
+
+model3 <- lm(libdem ~ polarization + log_wealth + oil_rents, data = modelData) 
+
+summary(model3)
 ```
 
 ## Model with Three Predictors {.smaller}
@@ -217,8 +215,7 @@ $$\hat{Y_i} = a + -.05*Polarization + .13*GDPpc + .00004*OilRents$$
 - Estimate a second multiple regression model that adds in GDP per capita (lg_gdppc)
 - Interpret the coefficients
 - What happens to the coefficients of the other variables when we add GDP per capita to the model?
-    - Why do you think this happens?
-- Try adding in additional predictors if there is time
+- Try additional predicotrs if there is time
 
 ```{r}
 #| label: time1
@@ -237,28 +234,28 @@ countdown(minutes = 10,
           color_finished_text = "#00264A")
 ```
 
-## Model 1
+## Two Predictors
 
 <br>
 
 ```{r}
-mod1 <- linear_reg() |>
-      set_engine("lm") |>
-      fit(corruption ~ libdem + polarization , data = modelData) |>
-      tidy() 
-mod1
+#| echo: true
+
+corruption1 <- lm(corruption ~ libdem + polarization , data = modelData) 
+
+summary(corruption1)
 ```
 
-## Model 2 - Adding GDP per capita
+## Adding GDP per capita
 
 <br>
 
 ```{r}
-mod2 <- linear_reg() |>
-      set_engine("lm") |>
-      fit(corruption ~ libdem + polarization + log_wealth, data = modelData) |>
-      tidy() 
-mod2
+#| echo: true
+
+corruption2 <- lm(corruption ~ libdem + polarization + log_wealth, data = modelData) 
+
+summary(corruption2)
 ```
 
 # Categorical Variables
@@ -283,7 +280,6 @@ ggplot(modelData, aes(x = log_wealth, y = libdem, color=factor(judicial_review))
   labs(x = "GPD per capita", y = "Liberal Democracy Index") +
   theme_bw() +
     scale_color_manual(name = "Judicial Review", values = c("steelblue3", "coral"), labels = c("No", "Yes")) 
-
 ```
 
 ## Judicial Review and Democracy
@@ -294,10 +290,9 @@ ggplot(modelData, aes(x = log_wealth, y = libdem, color=factor(judicial_review))
 #| label: judicial_review_model
 #| echo: true
 
-linear_reg() |>
-  set_engine("lm") |>
-  fit(libdem ~ factor(judicial_review), data = modelData) |>
-  tidy()
+jr_dem_model <- lm(libdem ~ factor(judicial_review), data = modelData)
+
+summary(jr_dem_model)
 ```
 
 ## Judicial Review and Democracy {.smaller}
@@ -336,8 +331,6 @@ levels(modelData$region)
 
 ## Democracy and World Region {.smaller}
 
-<br>
-
 How should we interpret intercept?  How about the coefficient on Latin America?
 
 <br>
@@ -346,10 +339,9 @@ How should we interpret intercept?  How about the coefficient on Latin America?
 #| label: region_model2
 #| echo: true
 
-linear_reg() |>
-  set_engine("lm") |>
-  fit(libdem ~ region, data = modelData) |>
-  tidy()
+regional_model1 <- lm(libdem ~ region, data = modelData)
+
+summary(regional_model1)
 ```
 
 ## Democracy and World Region {.smaller}
@@ -369,10 +361,9 @@ What if you want a different baseline category? How do we interpret now?
 modelData <- modelData |> 
 mutate(newReg = relevel(region, ref=4)) 
 
-linear_reg() |>
-      set_engine("lm") |>
-      fit(libdem ~ newReg, data = modelData) |>
-      tidy()
+regional_model2 <- lm(libdem ~ newReg, data = modelData) 
+
+summary(regional_model2)
 ```
 
 ## Your Turn
@@ -456,10 +447,9 @@ modelData |>
 ```{r}
 #| label: corruption_model
 
-linear_reg() |>
-      set_engine("lm") |>
-      fit(corruption ~ regime, data = modelData) |>
-      tidy()
+corruption <- lm(corruption ~ regime, data = modelData)
+
+summary(corruption)
 ```
 
 ## Create Your Own Model {.smaller}
