@@ -12,15 +12,13 @@ Your goal in this project is to apply the skills and tools we have learned this 
 
 ## Timeline
 
-- In class on April 23, please come to class ready to discuss your research question and dataset (details below). This will be an opportunity for you to make sure you are on the right track with the question you have selected and the data you are working with.
+- On the last day of class, we will also discuss some advanced formatting techniques and how to post your project to [Quarto Pub](https://quartopub.com/).
 
-- On April 23, we will also discuss some advanced formatting techniques and how to post your project to [Quarto Pub](https://quartopub.com/).
-
-- The project is **due on May 10** by 11:59 p.m., however you are free to submit the project anytime before then.
+- The project is **due on June 29th** by 11:59 p.m., however you are free to submit the project anytime before then.
 
 ## Group or Individual Work
 
--   You may work in groups of up to 3 members. If you work in a group, you must also submit a paragraph indicating how each of the group members participated and what aspects of the project they contributed to. Our expectation is that all group members will actively contribute.
+-   You may work in groups of up to 3 members. If you work in a group, you must also submit a paragraph indicating how each of the group members participated and what aspects of the project they contributed to. Our expectation is that all group members will actively contribute. If you work in a group, please only submit one project folder for evaluation. 
 
 -   You may also choose to work on your own.
 
@@ -45,15 +43,10 @@ Each project should include the following:
 - A description of the data you are using, including the source of the data and the variables you are using.
 - A description of the outcome variable you are trying to explain and why it is a good measure of the concept that you want to study.
 - Identify the explanatory variables that you will use to explain the outcome variable and discuss why they are relevant to your explanation. Is there one variable that you think is the most important? If so, why? Briefly justify your choices by referencing relevant materials. 
-- A brief summary of the literature related to your topic
-A clear research question that you are trying to answer.
-- A description of the data you are using, including the source of the data and the variables you are using.
-- At least one data visualization illustrating the distribution of one of your important variables, with appropriate interpretation. Usually, this would be the outcome variable you are trying to explain.
-- At least one other relevant visualization pertaining to your outcome variable (scatter plot, line chart, column chart) that tells us something substantive about that variable from the standpoint of your analysis.
+- At least one visualization pertaining to your outcome variable (histogram, scatter plot, line chart, column chart) that tells us something substantive about that variable from the standpoint of your analysis.
 - Choose one of the methods that we learned about in class to analyze the relationship between your outcome variable and your explanatory variables. This could be a linear regression, a logistic regression, or a hypothesis test involving bootstrapping methods.
-- Include a visualization (table or bar plot) that would illustrate whether your explanatory variables are statistically significant in explaining your outcome variable.
-- When interpreting your results, you should include an accurate interpretation of the p-value and associated hypothesis test.
-
+- Include a visualization (regression table or plot) that illustrates whether your explanatory variables are statistically significant in explaining your outcome variable.
+- An interpretation of the results that incorporates an accurate interpretation of the p-value and associated hypothesis test.
 
 ## Policy Implications
 

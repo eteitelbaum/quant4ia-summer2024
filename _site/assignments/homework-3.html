@@ -74,10 +74,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 <meta property="og:title" content="IAFF 6501–Spring 2024 Schedule - Homework 3">
-<meta property="og:description" content="Replicating Fearon and Laitin (2003)">
+<meta property="og:description" content="Analyzing Democracy">
 <meta property="og:site_name" content="IAFF 6501--Spring 2024 Schedule">
 <meta name="twitter:title" content="IAFF 6501–Spring 2024 Schedule - Homework 3">
-<meta name="twitter:description" content="Replicating Fearon and Laitin (2003)">
+<meta name="twitter:description" content="Analyzing Democracy">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -365,17 +365,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link active" data-scroll-target="#load-the-data">Load the Data</a>
-  <ul class="collapse">
-  <li><a href="#outcome-variable" id="toc-outcome-variable" class="nav-link" data-scroll-target="#outcome-variable">Outcome Variable</a></li>
-  <li><a href="#main-predictors" id="toc-main-predictors" class="nav-link" data-scroll-target="#main-predictors">Main Predictors</a></li>
-  </ul></li>
-  <li><a href="#replicate-model-1-from-fearon-and-laitin-20" id="toc-replicate-model-1-from-fearon-and-laitin-20" class="nav-link" data-scroll-target="#replicate-model-1-from-fearon-and-laitin-20">Replicate Model 1 from Fearon and Laitin (20%)</a></li>
-  <li><a href="#display-the-results-as-a-coefficient-plot-20" id="toc-display-the-results-as-a-coefficient-plot-20" class="nav-link" data-scroll-target="#display-the-results-as-a-coefficient-plot-20">Display the Results as a Coefficient Plot (20%)</a></li>
-  <li><a href="#create-a-regression-table-20" id="toc-create-a-regression-table-20" class="nav-link" data-scroll-target="#create-a-regression-table-20">Create a Regression Table (20%)</a></li>
-  <li><a href="#show-odds-ratios-and-interpret-20" id="toc-show-odds-ratios-and-interpret-20" class="nav-link" data-scroll-target="#show-odds-ratios-and-interpret-20">Show Odds Ratios and Interpret (20%)</a></li>
-  <li><a href="#display-predicted-probabilities-20" id="toc-display-predicted-probabilities-20" class="nav-link" data-scroll-target="#display-predicted-probabilities-20">Display Predicted Probabilities (20%)</a></li>
-  <li><a href="#extra-credit-4-pts" id="toc-extra-credit-4-pts" class="nav-link" data-scroll-target="#extra-credit-4-pts">Extra Credit (4 pts)</a></li>
+  <li><a href="#step-1-load-the-data-20-pts." id="toc-step-1-load-the-data-20-pts." class="nav-link active" data-scroll-target="#step-1-load-the-data-20-pts.">Step 1: Load the Data (20 pts.)</a></li>
+  <li><a href="#step-2-run-a-bivariate-linear-regression-model-20-pts." id="toc-step-2-run-a-bivariate-linear-regression-model-20-pts." class="nav-link" data-scroll-target="#step-2-run-a-bivariate-linear-regression-model-20-pts.">Step 2: Run a Bivariate Linear Regression Model (20 pts.)</a></li>
+  <li><a href="#step-3-interpret-the-results-20-pts." id="toc-step-3-interpret-the-results-20-pts." class="nav-link" data-scroll-target="#step-3-interpret-the-results-20-pts.">Step 3: Interpret the Results (20 pts.)</a></li>
+  <li><a href="#step-4-run-a-multiple-linear-regression-model-20-pts." id="toc-step-4-run-a-multiple-linear-regression-model-20-pts." class="nav-link" data-scroll-target="#step-4-run-a-multiple-linear-regression-model-20-pts.">Step 4: Run a Multiple Linear Regression Model (20 pts.)</a></li>
+  <li><a href="#step-5-interpret-the-results-20-pts." id="toc-step-5-interpret-the-results-20-pts." class="nav-link" data-scroll-target="#step-5-interpret-the-results-20-pts.">Step 5: Interpret the Results (20 pts.)</a></li>
+  <li><a href="#step-6-extra-credit-visualize-the-results-5-pts." id="toc-step-6-extra-credit-visualize-the-results-5-pts." class="nav-link" data-scroll-target="#step-6-extra-credit-visualize-the-results-5-pts.">Step 6 (extra credit): Visualize the Results (5 pts.)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/eteitelbaum/dataviz-summer-2023/edit/main/assignments/homework-3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/eteitelbaum/dataviz-summer-2023/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -385,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/homework-1.html">Homework</a></li><li class="breadcrumb-item"><a href="../assignments/homework-3.html">Homework 3</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Homework 3</h1>
-<p class="subtitle lead">Replicating Fearon and Laitin (2003)</p>
+<p class="subtitle lead">Analyzing Democracy</p>
 </div>
 
 
@@ -408,71 +403,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this homework assignment, we are going to be exploring the hugely influential article by Fearon and Laitin (2003) on civil war onset. Click <a href="https://www-jstor-org.proxygw.wrlc.org/stable/3118222?seq=11">here</a> to view the original article and see Table 1 for the model that we will be replicating. Click <a href="https://www.dropbox.com/scl/fo/5zb042x9tk608yj51sqhz/h?rlkey=ydipmj573fcz27bw89wv1lfe4&amp;dl=0">here</a> to access the assignment Dropbox folder that includes the data we will be using for this exercise.</p>
-<section id="load-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="load-the-data">Load the Data</h2>
-<p>Load the data which is included in the “fl_data_model1.csv” file in the Homework 3 assignment folder.</p>
-<p>The unit of analysis is the country-year.</p>
-<section id="outcome-variable" class="level3">
-<h3 class="anchored" data-anchor-id="outcome-variable">Outcome Variable</h3>
-<ul>
-<li><code>onset</code> - Whether a country-year experienced civil war onset (1 = yes, 0 = no)</li>
-</ul>
+<p>In this homework assignment, we are once again going to be exploring the correlates of democracy with V-Dem. But this time we are going to do so in the context of regression analysis.</p>
+<section id="step-1-load-the-data-20-pts." class="level2">
+<h2 class="anchored" data-anchor-id="step-1-load-the-data-20-pts.">Step 1: Load the Data (20 pts.)</h2>
+<p>Select the measure of democracy that you want to use and at least three variables that you believe correlate with democracy. Use the <code>vdem</code> or <code>vdemlite</code> package to load the V-Dem data into a data frame in your environment.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If there is another outcome in the V-Dem dataset besides a measure of democracy that you would want to analyze, feel free! the point of this exercise is mainly to practice running regression models and the exact variables that you use as independent and dependent variables are not as important.</p>
+</div>
+</div>
 </section>
-<section id="main-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="main-predictors">Main Predictors</h3>
-<ul>
-<li><code>warl</code>- Whether had a war ongoing in the previous year</li>
-<li><code>gdpenl</code> - GDP per capita (not logged)</li>
-<li><code>lpopl1</code> - The log of population lagged by one year</li>
-<li><code>lmtnest</code> - The log of the percentage of country that has mountainous terrain</li>
-<li><code>ncontig</code> - An indicator for noncontiguous state</li>
-<li><code>Oil</code> - An indicator for whether the country is an oil exporter</li>
-<li><code>nwstate</code> - An indicator for whether a country was created in the last two years</li>
-<li><code>instab</code> - An indicator for whether the Polity score changes by 3 or more in a given year</li>
-<li><code>polity2l</code> - The Polity2 democracy score</li>
-<li><code>ethfrac</code> - Ethno-linguistic fractionalization index</li>
-<li><code>relfrac</code> - Religious fractionalization index</li>
-</ul>
+<section id="step-2-run-a-bivariate-linear-regression-model-20-pts." class="level2">
+<h2 class="anchored" data-anchor-id="step-2-run-a-bivariate-linear-regression-model-20-pts.">Step 2: Run a Bivariate Linear Regression Model (20 pts.)</h2>
+<p>Run a bivariate linear regression model with your selected measure of democracy as the dependent variable and one of your selected predictors as the independent variable. Use the <code>lm()</code> function to run the model and the <code>summary()</code> function to view the results.</p>
 </section>
+<section id="step-3-interpret-the-results-20-pts." class="level2">
+<h2 class="anchored" data-anchor-id="step-3-interpret-the-results-20-pts.">Step 3: Interpret the Results (20 pts.)</h2>
+<p>Interpret the results of the regression model. What is the coefficient on the predictor variable? What does this coefficient tell you about the relationship between the predictor and democracy? Is the relationship stastically significant? How about the constant (intercept term)?</p>
 </section>
-<section id="replicate-model-1-from-fearon-and-laitin-20" class="level2">
-<h2 class="anchored" data-anchor-id="replicate-model-1-from-fearon-and-laitin-20">Replicate Model 1 from Fearon and Laitin (20%)</h2>
-<p>Run the first model (Model 1) from Table 1 of the Fearon and Laitin article. Use <code>summary()</code> to view the results. Interpret the coefficient on the Oil exporter variable. How much does being an oil exporter increase the risk of conflict onset?</p>
+<section id="step-4-run-a-multiple-linear-regression-model-20-pts." class="level2">
+<h2 class="anchored" data-anchor-id="step-4-run-a-multiple-linear-regression-model-20-pts.">Step 4: Run a Multiple Linear Regression Model (20 pts.)</h2>
+<p>Run a multiple linear regression model with your selected measure of democracy as the dependent variable and at least three of your selected predictors as the independent variables. Use the <code>lm()</code> function to run the model and the <code>summary()</code> function to view the results.</p>
 </section>
-<section id="display-the-results-as-a-coefficient-plot-20" class="level2">
-<h2 class="anchored" data-anchor-id="display-the-results-as-a-coefficient-plot-20">Display the Results as a Coefficient Plot (20%)</h2>
-<p>Now use the <code>modelplot()</code> function from the <code>modelsummary</code> package to display the results as a coefficient plot.</p>
-<p>When making your coefficient plot, start with the coefficient map. You might want to write it in the order that you’d like to see the coefficients displayed and then reverse it so that you can use the same map for your regression table below.</p>
-<p>Be sure to load the <code>modelsummary</code> and <code>ggplot2</code> packages before you get started with the rest of your code.</p>
-<p>Interpret the results. Which predictor has largest positive effect on the probability of conflict onset? Which one has the strongest negative effect?</p>
+<section id="step-5-interpret-the-results-20-pts." class="level2">
+<h2 class="anchored" data-anchor-id="step-5-interpret-the-results-20-pts.">Step 5: Interpret the Results (20 pts.)</h2>
+<p>Interpret the results of the multiple regression model. What is the coefficient on each of the predictor variables? What does this coefficient tell you about the relationship between the predictors and democracy? Are the relationships statistically significant? How would you interpret the constant (intercept term)?</p>
 </section>
-<section id="create-a-regression-table-20" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-regression-table-20">Create a Regression Table (20%)</h2>
-<p>Do stepwise regressions with different categories of regressors based on the same model to see how things change as you put different sets of variables into the model. Show the results of your models in separate columns in a regression table.</p>
-<p><strong>Step one:</strong> Run your <code>glm()</code> models and store them as objects. Here you might want to summarize them with <code>summary()</code> or <code>tidy()</code> from the <code>broom</code> package as you go along.</p>
-<p><strong>Step two:</strong> Save your models as a list and set up your caption and reference note.</p>
-<p><strong>Step three:</strong> Call <code>modelsummary</code> to display the table as a <code>gt</code> object.</p>
-<p><strong>Step four:</strong> Briefly interpret your results. What changes as you add different categories of variables to the model? Do any results become significant that were not significant before?</p>
-</section>
-<section id="show-odds-ratios-and-interpret-20" class="level2">
-<h2 class="anchored" data-anchor-id="show-odds-ratios-and-interpret-20">Show Odds Ratios and Interpret (20%)</h2>
-<p>Now make the table display odds ratios instead of coefficients and interpret one or two of the coefficients that you find interesting. (<em>Note</em>: you have already talked about Oil, so choose a different one for this part.)</p>
-</section>
-<section id="display-predicted-probabilities-20" class="level2">
-<h2 class="anchored" data-anchor-id="display-predicted-probabilities-20">Display Predicted Probabilities (20%)</h2>
-<p>Now display predicted probabilities for a handful of country-years. Filter the data for a particular year and the country cases that you are interested in. Find the predicted probabilities using the <code>precitions()</code> function from the <code>marginaleffects</code> package. Interpret the results. Why do some of the countries you chose have a higher probability of conflict onset than the others?</p>
-</section>
-<section id="extra-credit-4-pts" class="level2">
-<h2 class="anchored" data-anchor-id="extra-credit-4-pts">Extra Credit (4 pts)</h2>
-<p>If you would like to do some extra credit, you can try to recreate and extend the F&amp;L analysis with data from the <code>peacesciencer</code> package. Display your results in a regression table or coefficient plot.</p>
-<p>Here are some questions to answer about your analysis:</p>
-<ol type="1">
-<li><p>Which variables were you able to include from <code>peacesciencer</code>? What variables that were in F&amp;L were you not able to find? What are you missing? (1 pt.)</p></li>
-<li><p>Do you get results similar to F&amp;L with the <code>peacesciencer</code> data if you take a similar timeframe? (1 pt.)</p></li>
-<li><p>If you rerun the F&amp;L model with the same variables that you have available for <code>peacesciencer</code>, do you get similar results? If there are differences, why would this be? (1 pt.)</p></li>
-<li><p>What happens if you extend the analysis from 1945-1999 to 1945-present using the <code>peacesciencer</code> package? What changes? (1 pt.)</p></li>
-</ol>
+<section id="step-6-extra-credit-visualize-the-results-5-pts." class="level2">
+<h2 class="anchored" data-anchor-id="step-6-extra-credit-visualize-the-results-5-pts.">Step 6 (extra credit): Visualize the Results (5 pts.)</h2>
+<p>Use the <code>modelplot()</code> function from the <code>modelsummary()</code> package to create a coefficient plot or regression table visualizing your results. If you choose a regression table, you’ll probably want to run a few more models to get a more complete table.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While step six is extra credit, you will have to do it for the final project, so may as well get some practice now!</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -483,7 +463,7 @@ Submission Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Head over to Blackboard and go to the Homework 2 assignment. There you will find a link that you can use to upload your <strong>project folder</strong>.</p>
+<p>Head over to Blackboard and go to the Homework 3 assignment. There you will find a link that you can use to upload your <strong>project folder</strong>.</p>
 <p>If you worked with a partner, only one of you should submit the <strong>project folder</strong> but both of you should still make a submission to Blackboard so that we have a submission to grade. If you have worked with someoone but still have a substantially different project, you can submit separately.</p>
 <p>The person submitting the project folder should take a screen shot of the confirmation message (“Finished Uploading”) and share it with the other group members. This screen shot will be what you submit in Blackboard.</p>
 <p>Next, click “Create Submission” and write a statement stating whether you worked on the project independently or whether you are submitting jointly with someone else. Also note whether you used a large language model (LLM) like ChatGPT to help you with the work and which parts of the assignment you used the LLM for. It is fine to use an LLM to help with your code but you must acknowledge the use of it in your submission.</p>

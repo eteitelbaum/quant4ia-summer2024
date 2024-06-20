@@ -1,124 +1,60 @@
 ---
 title: "Homework 3"
-subtitle: "Replicating Fearon and Laitin (2003)"
+subtitle: "Analyzing Democracy"
 author: "Your Name"
 format: html
 ---
 
-In this homework assignment, we are going to be exploring the hugely influential article by Fearon and Laitin (2003) on civil war onset. Click [here](https://www-jstor-org.proxygw.wrlc.org/stable/3118222?seq=11) to view the original article and see Table 1 for the model that we will be replicating. Click [here](https://www.dropbox.com/scl/fo/5zb042x9tk608yj51sqhz/h?rlkey=ydipmj573fcz27bw89wv1lfe4&dl=0) to access the assignment Dropbox folder that includes the data we will be using for this exercise.
+In this homework assignment, we are once again going to be exploring the correlates of democracy with V-Dem. But this time we are going to do so in the context of regression analysis. 
 
-## Load the Data
+## Step 1: Load the Data (20 pts.)
 
-Load the data which is included in the "fl_data_model1.csv" file in the Homework 3 assignment folder. 
+Select the measure of democracy that you want to use and at least three variables that you believe correlate with democracy. Use the `vdem` or `vdemlite` package to load the V-Dem data into a data frame in your environment. 
 
-```{r}
-
-```
-
-The unit of analysis is the country-year. 
-
-### Outcome Variable
-
-- `onset` - Whether a country-year experienced civil war onset (1 = yes, 0 = no)
-
-### Main Predictors
-
-- `warl`- Whether had a war ongoing in the previous year
-- `gdpenl` - GDP per capita (not logged) 
-- `lpopl1` - The log of population lagged by one year 
-- `lmtnest` - The log of the percentage of country that has mountainous terrain 
-- `ncontig` - An indicator for noncontiguous state
-- `Oil` - An indicator for whether the country is an oil exporter
-- `nwstate` - An indicator for whether a country was created in the last two years
-- `instab` - An indicator for whether the Polity score changes by 3 or more in a given year 
-- `polity2l` - The Polity2 democracy score
-- `ethfrac` - Ethno-linguistic fractionalization index
-- `relfrac` -  Religious fractionalization index
-
-## Replicate Model 1 from Fearon and Laitin (20%)
-
-Run the first model (Model 1) from Table 1 of the Fearon and Laitin article. Use `summary()` to view the results. Interpret the coefficient on the Oil exporter variable. How much does being an oil exporter increase the risk of conflict onset? 
+::: {.callout-note}
+If there is another outcome in the V-Dem dataset besides a measure of democracy that you would want to analyze, feel free! the point of this exercise is mainly to practice running regression models and the exact variables that you use as independent and dependent variables are not as important.
+:::
 
 ```{r}
 
 ```
 
-## Display the Results as a Coefficient Plot (20%)
+## Step 2: Run a Bivariate Linear Regression Model (20 pts.)
 
-Now use the `modelplot()` function from the `modelsummary` package to display the results as a coefficient plot. 
-
-When making your coefficient plot, start with the coefficient map. You might want to write it in the order that you'd like to see the coefficients displayed and then reverse it so that you can use the same map for your regression table below.
-
-Be sure to load the `modelsummary` and `ggplot2` packages before you get started with the rest of your code.
-
-Interpret the results. Which predictor has largest positive effect on the probability of conflict onset? Which one has the strongest negative effect? 
+Run a bivariate linear regression model with your selected measure of democracy as the dependent variable and one of your selected predictors as the independent variable. Use the `lm()` function to run the model and the `summary()` function to view the results. 
 
 ```{r}
 
 ```
 
-## Create a Regression Table (20%)
+## Step 3: Interpret the Results (20 pts.)
 
-Do stepwise regressions with different categories of regressors based on the same model to see how things change as you put different sets of variables into the model. Show the results of your models in separate columns in a regression table. 
+Interpret the results of the regression model. What is the coefficient on the predictor variable? What does this coefficient tell you about the relationship between the predictor and democracy? Is the relationship stastically significant? How about the constant (intercept term)?
 
-**Step one:** Run your `glm()` models and store them as objects. Here you might want to summarize them with `summary()` or `tidy()` from the `broom` package as you go along. 
+## Step 4: Run a Multiple Linear Regression Model (20 pts.)
 
-```{r}
-
-```
-
-**Step two:** Save your models as a list and set up your caption and reference note. 
+Run a multiple linear regression model with your selected measure of democracy as the dependent variable and at least three of your selected predictors as the independent variables. Use the `lm()` function to run the model and the `summary()` function to view the results. 
 
 ```{r}
 
 ```
 
-**Step three:** Call `modelsummary` to display the table as a `gt` object. 
+## Step 5: Interpret the Results (20 pts.)
 
-```{r}
+Interpret the results of the multiple regression model. What is the coefficient on each of the predictor variables? What does this coefficient tell you about the relationship between the predictors and democracy? Are the relationships statistically significant? How would you interpret the constant (intercept term)?
 
-```
+## Step 6 (extra credit): Visualize the Results (5 pts.)
 
-**Step four:** Briefly interpret your results. What changes as you add different categories of variables to the model? Do any results become significant that were not significant before? 
+Use the `modelplot()` function from the `modelsummary()` package to create a coefficient plot or regression table visualizing your results. If you choose a regression table, you'll probably want to run a few more models to get a more complete table. 
 
-## Show Odds Ratios and Interpret (20%)
-
-Now make the table display odds ratios instead of coefficients and interpret one or two of the coefficients that you find interesting. (*Note*: you have already talked about Oil, so choose a different one for this part.)
-
-```{r}
-
-```
-
-## Display Predicted Probabilities (20%)
-
-Now display predicted probabilities for a handful of country-years. Filter the data for a particular year and the country cases that you are interested in. Find the predicted probabilities using the `precitions()` function from the `marginaleffects` package. Interpret the results. Why do some of the countries you chose have a higher probability of conflict onset than the others? 
-
-```{r}
-
-```
-
-## Extra Credit (4 pts)
-
-If you would like to do some extra credit, you can try to recreate and extend the F&L analysis with data from the `peacesciencer` package. Display your results in a regression table or coefficient plot. 
-
-```{r}
-
-```
-
-Here are some questions to answer about your analysis: 
-
-1. Which variables were you able to include from `peacesciencer`? What variables that were in F&L were you not able to find? What are you missing? (1 pt.)
-
-2. Do you get results similar to F&L with the `peacesciencer` data if you take a similar timeframe? (1 pt.)
-
-3. If you rerun the F&L model with the same variables that you have available for `peacesciencer`, do you get similar results? If there are differences, why would this be? (1 pt.)
-
-4. What happens if you extend the analysis from 1945-1999 to 1945-present using the `peacesciencer` package? What changes? (1 pt.)
+::: {.callout-note}
+While step six is extra credit, you will have to do it for the final project, so may as well get some practice now!
+:::
 
 ::: {.callout-important}
 ## Submission Instructions
 
-Head over to Blackboard and go to the Homework 2 assignment. There you will find a link that you can use to upload your **project folder**. 
+Head over to Blackboard and go to the Homework 3 assignment. There you will find a link that you can use to upload your **project folder**. 
 
 If you worked with a partner, only one of you should submit the **project folder** but both of you should still make a submission to Blackboard so that we have a submission to grade. If you have worked with someoone but still have a substantially different project, you can submit separately. 
 
@@ -130,4 +66,7 @@ Then, upload the screenshot you saved in the first step. Now submit the assignme
 
 Please remember to upload your entire **project folder** and not just the Quarto document.
 :::
+
+
+
 

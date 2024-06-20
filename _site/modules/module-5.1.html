@@ -472,7 +472,7 @@ Note
 <pre><code>Rows: 179
 Columns: 4
 $ country    &lt;chr&gt; "Mexico", "Suriname", "Sweden", "Switzerland", "Ghana", "So…
-$ lib_dem    &lt;dbl&gt; 0.433, 0.593, 0.875, 0.870, 0.614, 0.601, 0.754, 0.267, 0.1…
+$ lib_dem    &lt;dbl&gt; 0.434, 0.580, 0.871, 0.866, 0.615, 0.607, 0.755, 0.260, 0.1…
 $ wealth     &lt;dbl&gt; 16.814, 11.752, 48.804, 56.110, 5.608, 11.345, 39.061, 5.69…
 $ log_wealth &lt;dbl&gt; 2.8222119, 2.4640234, 3.8878123, 4.0273140, 1.7241941, 2.42…</code></pre>
 </div>
@@ -493,19 +493,19 @@ lm(formula = lib_dem ~ log_wealth, data = model_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.56940 -0.14620  0.03477  0.18752  0.37583 
+-0.57441 -0.14334  0.03911  0.18730  0.37017 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.13271    0.03798   3.494 0.000604 ***
-log_wealth   0.11967    0.01467   8.156 6.97e-14 ***
+(Intercept)  0.13051    0.03806   3.429 0.000758 ***
+log_wealth   0.12040    0.01471   8.188 5.75e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.2228 on 172 degrees of freedom
+Residual standard error: 0.2233 on 172 degrees of freedom
   (5 observations deleted due to missingness)
-Multiple R-squared:  0.2789,    Adjusted R-squared:  0.2747 
-F-statistic: 66.52 on 1 and 172 DF,  p-value: 6.974e-14</code></pre>
+Multiple R-squared:  0.2805,    Adjusted R-squared:  0.2763 
+F-statistic: 67.04 on 1 and 172 DF,  p-value: 5.754e-14</code></pre>
 </div>
 </div>
 <p>Notice that we use the <code>~</code> symbol to indicate that <code>lib_dem</code> is the outcome variable and <code>log_wealth</code> is the explanatory variable. Even though this is an equation, we cannot use <code>=</code> sign because in R <code>=</code> is an assignment operator just like <code>&lt;-</code>. The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function estimates the coefficients of the linear model. The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function gives us a summary of the model including the coefficients, the standard errors, the t-statistics, and the p-values.</p>
