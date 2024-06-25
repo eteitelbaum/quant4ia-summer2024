@@ -200,13 +200,11 @@ glimpse(conflict_df)
 #| label: bivariate_model
 #| echo: true
 
-conflict_model <- logistic_reg() |>
-  set_engine("glm") |>
-  fit(factor(ucdponset) ~ wbgdppc2011est,
+conflict_model <- glm(ucdponset ~ wbgdppc2011est,
                   data= conflict_df,
                   family = "binomial")
 
-tidy(conflict_model)
+summary(conflict_model)
 ```
 
 ## Interpreting the Results
@@ -302,15 +300,14 @@ selected_countries <- conflict_df |>
     statename %in% c("United States of America", "Venezuela", "Rwanda"),
     year == 1999)
 
-# extract the model
-conflict_fit <- conflict_model$fit
-
 # calculate margins for the subset
-marg_effects <- predictions(conflict_fit, newdata = selected_countries)
+marg_effects <- predictions(conflict_model, newdata = selected_countries)
 
-# tidy the results
+# view the results
+library(broom)
+
 tidy(marg_effects) |>
-  select(estimate, p.value, conf.low, conf.high, statename)
+  select(statename, estimate, p.value, conf.low, conf.high)
 ```
 
 ## Using `marginaleffects`
@@ -333,11 +330,11 @@ selected_countries <- conflict_df |>
 conflict_fit <- conflict_model$fit
 
 # calculate margins for the subset
-marg_effects <- predictions(conflict_fit, newdata = selected_countries)
+marg_effects <- predictions(conflict_model, newdata = selected_countries)
 
-# tidy the results
+# view the results
 tidy(marg_effects) |>
-  select(estimate, p.value, conf.low, conf.high, statename)
+  select(statename, estimate, p.value, conf.low, conf.high)
 ```
 
 

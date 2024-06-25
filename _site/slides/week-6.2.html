@@ -11,7 +11,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.533">
 
-  <meta name="dcterms.date" content="2024-06-20">
+  <meta name="dcterms.date" content="2024-06-25">
   <title>IAFF 6501–Spring 2024 Schedule - Regression Tables</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -408,7 +408,7 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">June 20, 2024</p>
+  <p class="date">June 25, 2024</p>
 </section>
 <section>
 <section id="multiple-logistic-regression" class="title-slide slide level1 center">
@@ -447,25 +447,39 @@
 <p><br></p>
 <p>Example, including multiple predictors associated with conflict:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>conflict_model <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a></a>  <span class="fu">fit</span>(<span class="fu">factor</span>(ucdponset) <span class="sc">~</span> ethfrac <span class="sc">+</span> relfrac <span class="sc">+</span> v2x_polyarchy <span class="sc">+</span> </span>
-<span id="cb2-4"><a></a>                          rugged <span class="sc">+</span> wbgdppc2011est <span class="sc">+</span> wbpopest,</span>
-<span id="cb2-5"><a></a>                  <span class="at">data=</span> conflict_df,</span>
-<span id="cb2-6"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb2-7"><a></a></span>
-<span id="cb2-8"><a></a><span class="fu">tidy</span>(conflict_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>conflict_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(ucdponset <span class="sc">~</span> ethfrac <span class="sc">+</span> relfrac <span class="sc">+</span> v2x_polyarchy <span class="sc">+</span> </span>
+<span id="cb2-2"><a></a>                          rugged <span class="sc">+</span> wbgdppc2011est <span class="sc">+</span> wbpopest,</span>
+<span id="cb2-3"><a></a>                  <span class="at">data=</span> conflict_df,</span>
+<span id="cb2-4"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="fu">summary</span>(conflict_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 5
-  term           estimate std.error statistic   p.value
-  &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)     -5.69      1.41      -4.04  0.0000527
-2 ethfrac          0.800     0.381      2.10  0.0356   
-3 relfrac         -0.391     0.417     -0.939 0.348    
-4 v2x_polyarchy   -0.602     0.509     -1.18  0.237    
-5 rugged           0.0641    0.0760     0.843 0.399    
-6 wbgdppc2011est  -0.372     0.121     -3.08  0.00204  
-7 wbpopest         0.293     0.0673     4.35  0.0000134</code></pre>
+<pre><code>
+Call:
+glm(formula = ucdponset ~ ethfrac + relfrac + v2x_polyarchy + 
+    rugged + wbgdppc2011est + wbpopest, family = "binomial", 
+    data = conflict_df)
+
+Coefficients:
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    -5.69260    1.40788  -4.043 5.27e-05 ***
+ethfrac         0.80005    0.38072   2.101  0.03560 *  
+relfrac        -0.39138    0.41673  -0.939  0.34764    
+v2x_polyarchy  -0.60161    0.50879  -1.182  0.23704    
+rugged          0.06413    0.07603   0.843  0.39897    
+wbgdppc2011est -0.37188    0.12059  -3.084  0.00204 ** 
+wbpopest        0.29318    0.06735   4.353 1.34e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1182.5  on 6150  degrees of freedom
+Residual deviance: 1126.7  on 6144  degrees of freedom
+  (885 observations deleted due to missingness)
+AIC: 1140.7
+
+Number of Fisher Scoring iterations: 7</code></pre>
 </div>
 </div>
 </section>
@@ -484,23 +498,22 @@
 <span id="cb4-7"><a></a>    statename <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United States of America"</span>, <span class="st">"Venezuela"</span>, <span class="st">"Rwanda"</span>),</span>
 <span id="cb4-8"><a></a>    year <span class="sc">==</span> <span class="dv">1999</span>)</span>
 <span id="cb4-9"><a></a></span>
-<span id="cb4-10"><a></a><span class="co"># extract the model</span></span>
-<span id="cb4-11"><a></a>conflict_fit <span class="ot">&lt;-</span> conflict_model<span class="sc">$</span>fit</span>
+<span id="cb4-10"><a></a><span class="co"># calculate margins for the subset</span></span>
+<span id="cb4-11"><a></a>marg_effects <span class="ot">&lt;-</span> <span class="fu">predictions</span>(conflict_model, <span class="at">newdata =</span> selected_countries)</span>
 <span id="cb4-12"><a></a></span>
-<span id="cb4-13"><a></a><span class="co"># calculate margins for the subset</span></span>
-<span id="cb4-14"><a></a>marg_effects <span class="ot">&lt;-</span> <span class="fu">predictions</span>(conflict_fit, <span class="at">newdata =</span> selected_countries)</span>
+<span id="cb4-13"><a></a><span class="co"># tidy the results</span></span>
+<span id="cb4-14"><a></a><span class="fu">library</span>(broom)</span>
 <span id="cb4-15"><a></a></span>
-<span id="cb4-16"><a></a><span class="co"># tidy the results</span></span>
-<span id="cb4-17"><a></a><span class="fu">tidy</span>(marg_effects) <span class="sc">|&gt;</span></span>
-<span id="cb4-18"><a></a>  <span class="fu">select</span>(estimate, p.value, conf.low, conf.high, statename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-16"><a></a><span class="fu">tidy</span>(marg_effects) <span class="sc">|&gt;</span></span>
+<span id="cb4-17"><a></a>  <span class="fu">select</span>(statename, estimate, p.value, conf.low, conf.high) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
-  estimate  p.value conf.low conf.high statename               
-     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                   
-1   0.0123 2.23e-28  0.00567    0.0264 United States of America
-2   0.0140 2.25e-70  0.00879    0.0222 Venezuela               
-3   0.0286 8.46e-39  0.0170     0.0477 Rwanda                  </code></pre>
+  statename                estimate  p.value conf.low conf.high
+  &lt;chr&gt;                       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 United States of America   0.0123 2.23e-28  0.00567    0.0264
+2 Venezuela                  0.0140 2.25e-70  0.00879    0.0222
+3 Rwanda                     0.0286 8.46e-39  0.0170     0.0477</code></pre>
 </div>
 </div>
 </section>
@@ -596,15 +609,15 @@
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tinytable_srhtlav2ymq02h0entws</title>
+    <title>tinytable_mmbpz33idt27kawl1slv</title>
     <style>
-.table td.tinytable_css_rtzt04fu1zaamap1v9da, .table th.tinytable_css_rtzt04fu1zaamap1v9da {    border-bottom: solid 0.1em #d3d8dc; }
-.table td.tinytable_css_999nylsak3wtw3qvzq9v, .table th.tinytable_css_999nylsak3wtw3qvzq9v {    text-align: left; }
-.table td.tinytable_css_sc839v5qqrfmf530pcod, .table th.tinytable_css_sc839v5qqrfmf530pcod {    text-align: center; }
-.table td.tinytable_css_ij0nn24gq0h3dgw9xul5, .table th.tinytable_css_ij0nn24gq0h3dgw9xul5 {    text-align: center; }
-.table td.tinytable_css_c508d44r50wod6r6s2rf, .table th.tinytable_css_c508d44r50wod6r6s2rf {    text-align: center; }
-.table td.tinytable_css_84os964chlkz90h7k4dn, .table th.tinytable_css_84os964chlkz90h7k4dn {    text-align: center; }
-.table td.tinytable_css_9l9ddv2zdbk2j5xx8tj5, .table th.tinytable_css_9l9ddv2zdbk2j5xx8tj5 {    border-bottom: solid 0.05em black; }
+.table td.tinytable_css_vi3fxj3oks1c5v08q3fx, .table th.tinytable_css_vi3fxj3oks1c5v08q3fx {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_b743nkjvco084pydr6sg, .table th.tinytable_css_b743nkjvco084pydr6sg {    text-align: left; }
+.table td.tinytable_css_aw7qc07l3wf9tqurfl14, .table th.tinytable_css_aw7qc07l3wf9tqurfl14 {    text-align: center; }
+.table td.tinytable_css_5amb682chsay5gfp3uog, .table th.tinytable_css_5amb682chsay5gfp3uog {    text-align: center; }
+.table td.tinytable_css_2ciy6s05tji7kalbu35s, .table th.tinytable_css_2ciy6s05tji7kalbu35s {    text-align: center; }
+.table td.tinytable_css_chunal7ivt3gq1pvwxny, .table th.tinytable_css_chunal7ivt3gq1pvwxny {    text-align: center; }
+.table td.tinytable_css_mqolmz6p049tp3ivkv1v, .table th.tinytable_css_mqolmz6p049tp3ivkv1v {    border-bottom: solid 0.05em black; }
     </style>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -622,7 +635,7 @@
 
   
     <div class="container">
-      <table class="table table-borderless" id="tinytable_srhtlav2ymq02h0entws" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_mmbpz33idt27kawl1slv" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Table 1: Predictors of Conflict Onset</caption>
               <tbody><tr>
@@ -746,12 +759,12 @@
     </div>
 
     <script>
-      function styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(i, j, css_id) {
-        var table = document.getElementById("tinytable_srhtlav2ymq02h0entws");
+      function styleCell_tinytable_s8214iixf66quedwpurg(i, j, css_id) {
+        var table = document.getElementById("tinytable_mmbpz33idt27kawl1slv");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_srhtlav2ymq02h0entws');
+        var table = document.getElementById('tinytable_mmbpz33idt27kawl1slv');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -759,8 +772,8 @@
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_ioe3eg9xvm90sg7f5b3v(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_srhtlav2ymq02h0entws");
+      function spanCell_tinytable_s8214iixf66quedwpurg(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_mmbpz33idt27kawl1slv");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -787,96 +800,96 @@
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 0, 'tinytable_css_rtzt04fu1zaamap1v9da') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 1, 'tinytable_css_rtzt04fu1zaamap1v9da') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 2, 'tinytable_css_rtzt04fu1zaamap1v9da') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 3, 'tinytable_css_rtzt04fu1zaamap1v9da') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 4, 'tinytable_css_rtzt04fu1zaamap1v9da') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(1, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(2, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(3, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(4, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(5, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(6, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(7, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(8, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(9, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(10, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(11, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(12, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(13, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(15, 0, 'tinytable_css_999nylsak3wtw3qvzq9v') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(1, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(2, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(3, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(4, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(5, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(6, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(7, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(8, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(9, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(10, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(11, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(12, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(13, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(15, 1, 'tinytable_css_sc839v5qqrfmf530pcod') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(1, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(2, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(3, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(4, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(5, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(6, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(7, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(8, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(9, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(10, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(11, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(12, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(13, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(15, 2, 'tinytable_css_ij0nn24gq0h3dgw9xul5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(1, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(2, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(3, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(4, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(5, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(6, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(7, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(8, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(9, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(10, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(11, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(12, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(13, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(15, 3, 'tinytable_css_c508d44r50wod6r6s2rf') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(0, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(1, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(2, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(3, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(4, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(5, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(6, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(7, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(8, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(9, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(10, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(11, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(12, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(13, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(15, 4, 'tinytable_css_84os964chlkz90h7k4dn') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 0, 'tinytable_css_9l9ddv2zdbk2j5xx8tj5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 1, 'tinytable_css_9l9ddv2zdbk2j5xx8tj5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 2, 'tinytable_css_9l9ddv2zdbk2j5xx8tj5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 3, 'tinytable_css_9l9ddv2zdbk2j5xx8tj5') })
-window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg7f5b3v(14, 4, 'tinytable_css_9l9ddv2zdbk2j5xx8tj5') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 0, 'tinytable_css_vi3fxj3oks1c5v08q3fx') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 1, 'tinytable_css_vi3fxj3oks1c5v08q3fx') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 2, 'tinytable_css_vi3fxj3oks1c5v08q3fx') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 3, 'tinytable_css_vi3fxj3oks1c5v08q3fx') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 4, 'tinytable_css_vi3fxj3oks1c5v08q3fx') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(1, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(2, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(3, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(4, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(5, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(6, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(7, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(8, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(9, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(10, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(11, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(12, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(13, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(15, 0, 'tinytable_css_b743nkjvco084pydr6sg') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(1, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(2, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(3, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(4, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(5, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(6, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(7, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(8, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(9, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(10, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(11, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(12, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(13, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(15, 1, 'tinytable_css_aw7qc07l3wf9tqurfl14') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(1, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(2, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(3, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(4, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(5, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(6, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(7, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(8, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(9, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(10, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(11, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(12, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(13, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(15, 2, 'tinytable_css_5amb682chsay5gfp3uog') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(1, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(2, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(3, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(4, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(5, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(6, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(7, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(8, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(9, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(10, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(11, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(12, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(13, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(15, 3, 'tinytable_css_2ciy6s05tji7kalbu35s') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(0, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(1, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(2, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(3, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(4, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(5, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(6, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(7, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(8, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(9, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(10, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(11, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(12, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(13, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(15, 4, 'tinytable_css_chunal7ivt3gq1pvwxny') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 0, 'tinytable_css_mqolmz6p049tp3ivkv1v') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 1, 'tinytable_css_mqolmz6p049tp3ivkv1v') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 2, 'tinytable_css_mqolmz6p049tp3ivkv1v') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 3, 'tinytable_css_mqolmz6p049tp3ivkv1v') })
+window.addEventListener('load', function () { styleCell_tinytable_s8214iixf66quedwpurg(14, 4, 'tinytable_css_mqolmz6p049tp3ivkv1v') })
     </script>
 
   
@@ -930,12 +943,12 @@ window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tinytable_ywa8igqmzqre8rexrv39</title>
+    <title>tinytable_hranaqey2idd5cfxjsob</title>
     <style>
-.table td.tinytable_css_fi37chljdi9cedw5xaiw, .table th.tinytable_css_fi37chljdi9cedw5xaiw {    border-bottom: solid 0.1em #d3d8dc; }
-.table td.tinytable_css_eorsw3oty7x6ndt6ozet, .table th.tinytable_css_eorsw3oty7x6ndt6ozet {    text-align: left; }
-.table td.tinytable_css_fcvvrwp9herx0v025emj, .table th.tinytable_css_fcvvrwp9herx0v025emj {    text-align: center; }
-.table td.tinytable_css_6nhot3tq2674hfoae8s6, .table th.tinytable_css_6nhot3tq2674hfoae8s6 {    border-bottom: solid 0.05em black; }
+.table td.tinytable_css_rwel1loitbes700d4cvi, .table th.tinytable_css_rwel1loitbes700d4cvi {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_u8p6lnx8yluwwcloe1p2, .table th.tinytable_css_u8p6lnx8yluwwcloe1p2 {    text-align: left; }
+.table td.tinytable_css_2b1qkqqug71rj4uxdpi1, .table th.tinytable_css_2b1qkqqug71rj4uxdpi1 {    text-align: center; }
+.table td.tinytable_css_hsp6hlsnjnr24xpr7r2y, .table th.tinytable_css_hsp6hlsnjnr24xpr7r2y {    border-bottom: solid 0.05em black; }
     </style>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -953,7 +966,7 @@ window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg
 
   
     <div class="container">
-      <table class="table table-borderless" id="tinytable_ywa8igqmzqre8rexrv39" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_hranaqey2idd5cfxjsob" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Table 1: Predictors of Conflict Onset</caption>
               <tbody><tr>
@@ -1029,12 +1042,12 @@ window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg
     </div>
 
     <script>
-      function styleCell_tinytable_l1kojgx7m60vbtiogeri(i, j, css_id) {
-        var table = document.getElementById("tinytable_ywa8igqmzqre8rexrv39");
+      function styleCell_tinytable_yb7fzloqw35tgfuhjvls(i, j, css_id) {
+        var table = document.getElementById("tinytable_hranaqey2idd5cfxjsob");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_ywa8igqmzqre8rexrv39');
+        var table = document.getElementById('tinytable_hranaqey2idd5cfxjsob');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1042,8 +1055,8 @@ window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_l1kojgx7m60vbtiogeri(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_ywa8igqmzqre8rexrv39");
+      function spanCell_tinytable_yb7fzloqw35tgfuhjvls(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_hranaqey2idd5cfxjsob");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -1070,42 +1083,42 @@ window.addEventListener('load', function () { styleCell_tinytable_ioe3eg9xvm90sg
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(0, 0, 'tinytable_css_fi37chljdi9cedw5xaiw') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(0, 1, 'tinytable_css_fi37chljdi9cedw5xaiw') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(0, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(1, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(2, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(3, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(4, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(5, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(6, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(7, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(8, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(9, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(10, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(11, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(12, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(13, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(14, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(15, 0, 'tinytable_css_eorsw3oty7x6ndt6ozet') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(0, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(1, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(2, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(3, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(4, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(5, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(6, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(7, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(8, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(9, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(10, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(11, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(12, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(13, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(14, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(15, 1, 'tinytable_css_fcvvrwp9herx0v025emj') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(14, 0, 'tinytable_css_6nhot3tq2674hfoae8s6') })
-window.addEventListener('load', function () { styleCell_tinytable_l1kojgx7m60vbtiogeri(14, 1, 'tinytable_css_6nhot3tq2674hfoae8s6') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(0, 0, 'tinytable_css_rwel1loitbes700d4cvi') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(0, 1, 'tinytable_css_rwel1loitbes700d4cvi') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(0, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(1, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(2, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(3, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(4, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(5, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(6, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(7, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(8, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(9, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(10, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(11, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(12, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(13, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(14, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(15, 0, 'tinytable_css_u8p6lnx8yluwwcloe1p2') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(0, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(1, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(2, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(3, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(4, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(5, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(6, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(7, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(8, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(9, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(10, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(11, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(12, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(13, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(14, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(15, 1, 'tinytable_css_2b1qkqqug71rj4uxdpi1') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(14, 0, 'tinytable_css_hsp6hlsnjnr24xpr7r2y') })
+window.addEventListener('load', function () { styleCell_tinytable_yb7fzloqw35tgfuhjvls(14, 1, 'tinytable_css_hsp6hlsnjnr24xpr7r2y') })
     </script>
 
   

@@ -11,7 +11,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.533">
 
-  <meta name="dcterms.date" content="2024-06-20">
+  <meta name="dcterms.date" content="2024-06-25">
   <title>IAFF 6501–Spring 2024 Schedule - Logistic Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -408,7 +408,7 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">June 20, 2024</p>
+  <p class="date">June 25, 2024</p>
 </section>
 <section>
 <section id="binary-outcomes" class="title-slide slide level1 center">
@@ -504,7 +504,7 @@
 <section id="logit-function" class="slide level2">
 <h2>Logit Function</h2>
 
-<img data-src="week-6.1_files/figure-html/logit_function-1.png" width="672" class="r-stretch"></section>
+<img data-src="week-6.1_files/figure-revealjs/logit_function-1.png" width="960" class="r-stretch"></section>
 <section id="logistic-regression-model" class="slide level2">
 <h2>Logistic Regression Model</h2>
 <p><br></p>
@@ -603,19 +603,31 @@ $ newlmtnest     &lt;dbl&gt; 3.214868, 3.214868, 3.214868, 3.214868, 3.214868, 3
 <h2>Bivariate Logistic Regression</h2>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>conflict_model <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a></a>  <span class="fu">fit</span>(<span class="fu">factor</span>(ucdponset) <span class="sc">~</span> wbgdppc2011est,</span>
-<span id="cb3-4"><a></a>                  <span class="at">data=</span> conflict_df,</span>
-<span id="cb3-5"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a><span class="fu">tidy</span>(conflict_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>conflict_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(ucdponset <span class="sc">~</span> wbgdppc2011est,</span>
+<span id="cb3-2"><a></a>                  <span class="at">data=</span> conflict_df,</span>
+<span id="cb3-3"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a><span class="fu">summary</span>(conflict_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term           estimate std.error statistic  p.value
-  &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)      -1.16     0.426      -2.73 6.37e- 3
-2 wbgdppc2011est   -0.331    0.0526     -6.29 3.20e-10</code></pre>
+<pre><code>
+Call:
+glm(formula = ucdponset ~ wbgdppc2011est, family = "binomial", 
+    data = conflict_df)
+
+Coefficients:
+               Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    -1.16241    0.42606  -2.728  0.00637 ** 
+wbgdppc2011est -0.33082    0.05261  -6.289  3.2e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1389.6  on 7035  degrees of freedom
+Residual deviance: 1358.4  on 7034  degrees of freedom
+AIC: 1362.4
+
+Number of Fisher Scoring iterations: 7</code></pre>
 </div>
 </div>
 </section>
@@ -686,15 +698,14 @@ $ newlmtnest     &lt;dbl&gt; 3.214868, 3.214868, 3.214868, 3.214868, 3.214868, 3
 <span id="cb5-7"><a></a>    statename <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"United States of America"</span>, <span class="st">"Venezuela"</span>, <span class="st">"Rwanda"</span>),</span>
 <span id="cb5-8"><a></a>    year <span class="sc">==</span> <span class="dv">1999</span>)</span>
 <span id="cb5-9"><a></a></span>
-<span id="cb5-10"><a></a><span class="co"># extract the model</span></span>
-<span id="cb5-11"><a></a>conflict_fit <span class="ot">&lt;-</span> conflict_model<span class="sc">$</span>fit</span>
+<span id="cb5-10"><a></a><span class="co"># calculate margins for the subset</span></span>
+<span id="cb5-11"><a></a>marg_effects <span class="ot">&lt;-</span> <span class="fu">predictions</span>(conflict_model, <span class="at">newdata =</span> selected_countries)</span>
 <span id="cb5-12"><a></a></span>
-<span id="cb5-13"><a></a><span class="co"># calculate margins for the subset</span></span>
-<span id="cb5-14"><a></a>marg_effects <span class="ot">&lt;-</span> <span class="fu">predictions</span>(conflict_fit, <span class="at">newdata =</span> selected_countries)</span>
+<span id="cb5-13"><a></a><span class="co"># view the results</span></span>
+<span id="cb5-14"><a></a><span class="fu">library</span>(broom)</span>
 <span id="cb5-15"><a></a></span>
-<span id="cb5-16"><a></a><span class="co"># tidy the results</span></span>
-<span id="cb5-17"><a></a><span class="fu">tidy</span>(marg_effects) <span class="sc">|&gt;</span></span>
-<span id="cb5-18"><a></a>  <span class="fu">select</span>(estimate, p.value, conf.low, conf.high, statename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-16"><a></a><span class="fu">tidy</span>(marg_effects) <span class="sc">|&gt;</span></span>
+<span id="cb5-17"><a></a>  <span class="fu">select</span>(statename, estimate, p.value, conf.low, conf.high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="using-marginaleffects-1" class="slide level2">
@@ -703,11 +714,11 @@ $ newlmtnest     &lt;dbl&gt; 3.214868, 3.214868, 3.214868, 3.214868, 3.214868, 3
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
-  estimate   p.value conf.low conf.high statename               
-     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                   
-1  0.00853 4.20e-161  0.00606    0.0120 United States of America
-2  0.0141  0          0.0113     0.0175 Venezuela               
-3  0.0311  1.36e-250  0.0256     0.0377 Rwanda                  </code></pre>
+  statename                estimate   p.value conf.low conf.high
+  &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 United States of America  0.00853 4.20e-161  0.00606    0.0120
+2 Venezuela                 0.0141  0          0.0113     0.0175
+3 Rwanda                    0.0311  1.36e-250  0.0256     0.0377</code></pre>
 </div>
 </div>
 </section>
@@ -947,6 +958,44 @@ $ newlmtnest     &lt;dbl&gt; 3.214868, 3.214868, 3.214868, 3.214868, 3.214868, 3
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

@@ -71,14 +71,12 @@ Example, including multiple predictors associated with conflict:
 #| label: multivariate_model
 #| echo: true
 
-conflict_model <- logistic_reg() |>
-  set_engine("glm") |>
-  fit(factor(ucdponset) ~ ethfrac + relfrac + v2x_polyarchy + 
+conflict_model <- glm(ucdponset ~ ethfrac + relfrac + v2x_polyarchy + 
                           rugged + wbgdppc2011est + wbpopest,
                   data= conflict_df,
                   family = "binomial")
 
-tidy(conflict_model)
+summary(conflict_model)
 ```
 
 ## Predicted Probabilities
@@ -100,15 +98,14 @@ selected_countries <- conflict_df |>
     statename %in% c("United States of America", "Venezuela", "Rwanda"),
     year == 1999)
 
-# extract the model
-conflict_fit <- conflict_model$fit
-
 # calculate margins for the subset
-marg_effects <- predictions(conflict_fit, newdata = selected_countries)
+marg_effects <- predictions(conflict_model, newdata = selected_countries)
 
 # tidy the results
+library(broom)
+
 tidy(marg_effects) |>
-  select(estimate, p.value, conf.low, conf.high, statename)
+  select(statename, estimate, p.value, conf.low, conf.high) 
 ```
 
 ## Your Turn! 
